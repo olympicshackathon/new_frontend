@@ -29,7 +29,7 @@ class ProfileContainer extends React.Component {
               <div className='col-md-8'>
                 <div className='createOuter'>
                   <div className='page-form'>
-                    <ProfileForm 
+                    <UserProfileForm 
                       userProfile={this.props.userProfile} 
                       onComplete={this.handleProfileUpdate}
                       profileAction={profileAction}

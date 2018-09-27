@@ -16,6 +16,7 @@ export const userValidation = props => {
       if(token) {
         props.tokenSignIn(token)
           .then(() => {
+            console.log('token sign in hit');
             return props.userProfileFetch()
               .catch(() => logError);
           })
