@@ -1,0 +1,225 @@
+// @import './../lib/vars'; 
+header {
+  background-color: #FFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1500;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.25);
+  min-height: 70px;
+  transition: transform .2s linear;
+  font-size: 17px;
+  line-height: 1.59;
+  color: #111;
+}
+.navPrimary {
+  width: auto;
+  position: relative;
+  height: 70px;
+  background-color: #fff;
+  overflow: hidden;
+  padding: 17px 0 0 19px;
+  z-index: 1000;
+}
+.navPrimary-toggle {
+  position: relative;
+  top: 10px;
+  width: 20px;
+  height: 15px;
+  float: left;
+  margin-right: 14px;
+  display: block;
+  background-color: #fff;
+  cursor: pointer;
+}
+.navPrimary-toggle span:nth-child(1) {
+  top: 0;
+}
+.navPrimary-toggle span:nth-child(2) {
+  top: 6px;
+}
+.navPrimary-toggle span:nth-child(3) {
+  top: 6px;
+}
+.navPrimary-toggle span:nth-child(4) {
+  top: 12px;
+}
+.ddOpen span:nth-child(1) {
+  width: 0;
+}
+.ddOpen span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.ddOpen span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.ddOpen span:nth-child(4) {
+  width: 0;
+}
+.navPrimary-toggle span {
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  background: #111;
+  left: 0;
+  opacity: 1;
+  -webkit-transform: rotate(0);
+  transform: rotate(0);
+  transition: .2s ease-in-out;
+}
+.navPrimary-logo {
+  display: block;
+  float: left;
+  width: 158px;
+  height: 36px;
+  text-indent: 75px;
+  background-image: url(https://i.imgur.com/q2wzhF6.png);
+  background-repeat: no-repeat;
+  background-size: 75px 36px;
+  outline: 0!important;
+  cursor: pointer;
+}
+.logo1 {
+  font-weight: 700;
+  position: absolute;
+  text-indent: 5px;
+  margin-top: -2.5px;
+  font-size: 16px;
+}
+.logo2 {
+  position: absolute;
+  text-indent: 5px;
+  margin-top: 12.5px;
+  font-weight: 400;
+  font-size: 16px;
+}
+.navPrimary-dropdown {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.navShadow {
+  width: 100%;
+  margin-bottom: 40px;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,.25);
+  position: fixed;
+  z-index: 500;
+  height: 70px;
+}
+.navPrimary-menu {
+  padding-top: 70px;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+  list-style: none;
+  padding-left: 0 !important;
+}
+.navPrimary-li {
+  text-align: left;
+  width: auto;
+}
+.navPrimary-li-text {
+  display: block;
+  text-decoration: none;
+  color: #111;
+  font-size: 22px;
+  line-height: 1;
+  padding: 10px 25px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0;
+  position: relative;
+  cursor: pointer;
+}
+.navPrimary-li-text:hover {
+  color: #3c3c3c;
+}
+// nav form
+.navForm-div {
+  margin: 40px auto;
+  
+  .userauth-form {
+    font-size: 17px;
+    line-height: 1.59;
+    color: #3c3c3c;
+    width: calc((100vw - 65px));
+    margin: auto;
+
+    h2.title {
+      margin-bottom: 15px;
+      font-size: 17px;
+      color: #111;
+      line-height: 1.2;
+      font-weight: 600;
+      margin: 0 0 15px !important;
+    }
+    input {
+      font-size: 13px;
+      background-color: transparent !important;
+      border: 1px solid #dfe4e4;
+      border-radius: 2px;
+      box-shadow: none;
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      height: 39px;
+      padding: 8px;
+      margin: 0 0 24px;
+      color: #000;
+      transition: box-shadow .5s,border-color .25s ease-in-out;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input:active, input:focus {
+      border: 1px solid #111;
+      box-shadow: 0 0 5px #afafaf;
+      -webkit-box-shadow: 0 0 5px #afafaf;
+      transition: box-shadow .5s,border-color .25s ease-in-out;
+    }
+  }
+
+  button {
+    float: right;
+    margin-left: 20px;
+  }
+}
+
+// hacky but removes chrome's yellow autofill input background
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+   -webkit-box-shadow: 0 0 0px 1000px white inset!important;
+}
+
+input:active, input:focus {
+  border: 1px solid #111;
+  box-shadow: 0 0 5px #afafaf;
+  -webkit-box-shadow: 0 0 5px #afafaf;
+  transition: box-shadow .5s,border-color .25s ease-in-out;
+}
+
+@media (min-width: 465px) {
+  .navForm-div .userauth-form {
+    width: 40vw;
+    min-width: 400px;
+  }
+}

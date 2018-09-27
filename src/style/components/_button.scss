@@ -1,0 +1,50 @@
+.userauth-buttons {
+    text-align: right;
+}
+.formButton {
+    width: 190px;
+    margin: 0;
+    padding: 12px 5px 10px;
+    background-color: #dfe4e4;
+    color: #111;
+    display: inline-block;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.2;
+    letter-spacing: 3px;
+    font-weight: 600;
+    transition: background-color .25s ease-out,color .25s ease-out;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    text-align: center;
+    text-transform: uppercase;
+}
+.formButton:hover{
+    -webkit-animation: buttoncolor .9s 1;
+    animation: buttoncolor 1.25s 1;
+    color: #FFF;
+    background-color: #df0024;
+}
+.darkButton {
+    background-color: #4d4d4d;
+    color: #FFF;
+}
+
+@keyframes buttoncolor {
+    0%  { background-color: #0085c7; }
+    25%  { background-color: #f4c300; }
+    50%  { background-color: #000000; }
+    75%  { background-color: #0da447; }
+    100%  { background-color: #df0024; }
+}
+@media (max-width: 464px) {
+    .formButton {
+        width: calc((100vw - 85px) / 2);
+    }
+}
+@media (min-width: 1000px) {
+    .formButton {
+        width: calc((20vw - 10px));
+    }
+}
