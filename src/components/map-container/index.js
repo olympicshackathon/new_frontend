@@ -21,6 +21,7 @@ class MapContainer extends React.Component {
           showingInfoWindow: false,
           activeMarker: {},
           selectedPlace: {},
+          places: [],
         }
     }
     componentWillMount() {
@@ -36,12 +37,12 @@ class MapContainer extends React.Component {
         this.mounted = false;
     };
 
-    handleGooglePlacesFetch = location => {
-        console.log('location: ', location);
-        return this.props.googlePlacesFetch(location)
-            .then(results => console.log(results))
-            .catch(logError);
-    };
+    // handleGooglePlacesFetch = location => {
+    //     console.log('location: ', location);
+    //     return this.props.googlePlacesFetch(location)
+    //         .then(results => console.log(results))
+    //         .catch(logError);
+    // };
 
     updatePosition = () => {
         if (navigator && navigator.geolocation) {
@@ -52,27 +53,34 @@ class MapContainer extends React.Component {
                         lng: pos.coords.longitude
                     }
                 });
-                this.handleGooglePlacesFetch({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+                // this.handleGooglePlacesFetch({ lat: pos.coords.latitude, lng: pos.coords.longitude });
             })
         }
         else
             console.log('no');
     }
 
-    googlePlacesCallback = (results, status) => {
-        console.log('results: ', results);
-        console.log('status: ', status);
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-              console.log('results[i]: '. results[i]);
-            // var place = results[i];
-            // createMarker(results[i]);
+    onMapReady = (mapProps, map) => this.searchNearby(map, map.center);
+
+    searchNearby = (map, center) => {
+        const { google } = this.props;
+    
+        const service = new google.maps.places.PlacesService(map);
+    
+        // Specify location, radius and place types for your Places API search.
+        const request = {
+          location: center,
+          radius: '500',
+          type: ['food']
+        };
+    
+        service.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK)
+          {
+            console.log('results: ', results);
+            this.setState({ places: results });
           }
-        }
-    }
-
-    fetchplaces = () => {
-
+        });
     };
 
     onMapClicked = props => {
@@ -119,7 +127,7 @@ class MapContainer extends React.Component {
         // let currentPositionIcon = require('../helpers/assets/position.png');
         return (
             <Map google={this.props.google} zoom={14} center={this.state.currentLocation} 
-                 onReady={this.fetchPlaces} onClick={this.onMapClicked}>
+                 onReady={this.onMapReady} onClick={this.onMapClicked} >
                 <Marker onClick={this.onMarkerClick}
                         onMouseover={this.onMouseoverMarker}
                         name={'Current location'} 
