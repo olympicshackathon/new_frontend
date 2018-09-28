@@ -123,7 +123,7 @@ button, a, link {
     -webkit-font-smoothing: antialiased; } }
 
 .container-outer {
-  margin-top: 84px; }
+  margin-top: 50px; }
 
 @-ms-viewport {
   width: device-width; }
@@ -845,7 +845,7 @@ header {
   width: 100%;
   z-index: 1500;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
-  min-height: 70px;
+  min-height: 50px;
   transition: -webkit-transform .2s linear;
   transition: transform .2s linear;
   transition: transform .2s linear, -webkit-transform .2s linear;
@@ -970,7 +970,8 @@ header {
   -webkit-margin-end: 0px;
   -webkit-padding-start: 40px;
   list-style: none;
-  padding-left: 0 !important; }
+  padding-left: 0 !important;
+  height: 100%; }
 
 .navPrimary-li {
   text-align: left;
@@ -1019,6 +1020,83 @@ header {
   #signInBanner p {
     font-weight: 500;
     color: #646462; }
+
+.darkNavSection-auth {
+  background-color: #153F90;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  width: 140px;
+  text-align: right; }
+  .darkNavSection-auth .coins {
+    color: #fff;
+    margin-right: 50px;
+    margin-top: 10px; }
+    .darkNavSection-auth .coins p {
+      font-weight: 500;
+      font-size: 20px; }
+  .darkNavSection-auth .navcoinlogo {
+    height: 30px;
+    position: absolute;
+    right: 10px;
+    top: 10px; }
+
+.darkNavSection-ddOpen {
+  position: absolute;
+  left: 0;
+  width: calc((80vw - 60px));
+  text-align: left; }
+  .darkNavSection-ddOpen .grayedoutnav {
+    background: #50504f;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20vw;
+    z-index: 9; }
+  .darkNavSection-ddOpen .distanceContainer {
+    display: inline-block; }
+  .darkNavSection-ddOpen .distance {
+    height: 50px;
+    display: inline-block;
+    margin-right: 2vw;
+    margin-left: 2vw;
+    color: #fff;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 20px; }
+    .darkNavSection-ddOpen .distance p {
+      font-weight: 500;
+      font-size: 20px; }
+  .darkNavSection-ddOpen .coins {
+    display: inline-block; }
+
+.ddOpen {
+  margin-top: 7.5px;
+  position: absolute;
+  right: calc((20vw)); }
+
+.navPrimary-li {
+  position: relative;
+  min-height: 64px; }
+  .navPrimary-li .navPrimary-li-text {
+    text-align: left; }
+    .navPrimary-li .navPrimary-li-text img {
+      height: 40px;
+      position: absolute;
+      left: 0;
+      bottom: 3px; }
+    .navPrimary-li .navPrimary-li-text span {
+      font-weight: 500;
+      margin-left: 35px; }
+
+.logoutButton {
+  position: absolute !important;
+  bottom: 30px !important;
+  margin: 0 !important;
+  width: calc((80vw - 55px)) !important;
+  cursor: pointer !important; }
 
 .navForm-div {
   margin: 40px auto; }
@@ -1118,6 +1196,21 @@ input:active, input:focus {
   padding-left: 10px;
   color: #8b8b8b;
   font-size: 13px; }
+
+.indentSmall {
+  margin-left: 0 !important; }
+
+@media (max-width: 399px) {
+  .indentSmall {
+    padding-left: 35px; }
+  .navPrimary-li .navPrimary-li-text .dcicon {
+    bottom: inherit; }
+  .dc-li {
+    margin-bottom: 22px !important; } }
+
+@media (min-width: 400px) {
+  .break {
+    display: none; } }
 
 .modal {
   position: fixed;
@@ -1308,6 +1401,10 @@ input:active, input:focus {
 .lightBlue {
   background-color: #008FD7;
   color: #fff; }
+
+.lightBlueRev {
+  color: #008FD7;
+  background-color: #fff; }
 
 .randomGray {
   color: #8b8b8b;

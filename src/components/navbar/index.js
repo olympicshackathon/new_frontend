@@ -66,8 +66,20 @@ class Navbar extends React.Component {
                 <span></span>
                 <span></span>
               </div>
-              <div className='darkNavSection'>
+              <div className={classToggler({
+                'darkNavSection': true,
+                'darkNavSection-ddOpen': this.state.showDropDown,
+                'darkNavSection-auth': this.props.userAuth,
+              })}>
                 {renderIf(this.props.userAuth && this.state.showDropDown ,
+                  <div className='distanceContainer'>
+                  <div className='grayedoutnav'></div>
+                  <div className='distance'>
+                    <p>7,3 km</p>
+                  </div>
+                  </div>
+                )}
+                {renderIf(this.props.userAuth,
                   <div className='coins'>
                     <p> 10.63 </p>
                   </div>
@@ -76,36 +88,28 @@ class Navbar extends React.Component {
                   'navcoinlogo': true,
                   'extrapadding': !this.props.userAuth,
                   })} src='https://i.imgur.com/ey72AKX.png' />
-                {renderIf(this.props.userAuth && this.state.showDropDown ,
-                  <div className='distance'>
-                    <p>7,3 km</p>
-                  </div>
-                )}
               </div>
             </div>
             {renderIf(this.props.userAuth && this.state.showDropDown ,
               <div className='navPrimary-dropdown'>
-                <div className='navShadow'></div>
                 <ul className='navPrimary-menu'>
                   <li className='navPrimary-li'>
-                    <Link to='/dashboard' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/OPUUc13.png' className='navIcons dbicon'/> DASHBOARD</Link>
+                    <Link to='/dashboard' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/OPUUc13.png' className='navIcons dbicon'/> <span>DASHBOARD</span></Link>
                   </li>
                   <li className='navPrimary-li'>
-                    <Link to='/map' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/gxfbqpg.png' className='navIcons mapicon'/> MAP</Link>
+                    <Link to='/map' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/gxfbqpg.png' className='navIcons mapicon'/> <span>MAP</span></Link>
+                  </li>
+                  <li className='navPrimary-li dc-li'>
+                    <Link to='/dailychallenge' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/KgDT2nR.png' className='navIcons dcicon'/> <span>DAILY</span> <br className='break'/> <span className='indentSmall'>CHALLENGE</span></Link>
                   </li>
                   <li className='navPrimary-li'>
-                    <Link to='/dailychallenge' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/KgDT2nR.png' className='navIcons dcicon'/> DAILY CHALLENGE</Link>
-                  </li>
-                  <li className='navPrimary-li'>
-                    <Link to='/mywallet' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/Bnd3w7M.png' className='navIcons walleticon'/> MY WALLET</Link>
-                  </li>
-                  <li className='navPrimary-li'>
-                    <p className='navPrimary-li-text' onClick={this.handleSignOut}>LOGOUT</p>
+                    <Link to='/mywallet' className='navPrimary-li-text' onClick={() => this.setState({ showDropDown: false })}><img src='https://i.imgur.com/Bnd3w7M.png' className='navIcons walleticon'/> <span>MY WALLET</span></Link>
                   </li>
                 </ul>
+                <p className='button oauthbuttonText lightBlueRev logoutButton' onClick={this.handleSignOut}><span>LOG OUT</span></p>
               </div>
             )}
-            {renderIf(!this.props.userAunth,
+            {renderIf(!this.props.userAuth,
             <div className='ddContainer'>
               <div id='signInBanner'>
                 {renderIf(this.state.authFormAction =='Sign In',

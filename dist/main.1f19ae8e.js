@@ -35082,8 +35082,18 @@ function (_React$Component) {
           'ddOpen': this.state.showDropDown
         })
       }, _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null)), _react.default.createElement("div", {
-        className: "darkNavSection"
+        className: (0, _util.classToggler)({
+          'darkNavSection': true,
+          'darkNavSection-ddOpen': this.state.showDropDown,
+          'darkNavSection-auth': this.props.userAuth
+        })
       }, (0, _util.renderIf)(this.props.userAuth && this.state.showDropDown, _react.default.createElement("div", {
+        className: "distanceContainer"
+      }, _react.default.createElement("div", {
+        className: "grayedoutnav"
+      }), _react.default.createElement("div", {
+        className: "distance"
+      }, _react.default.createElement("p", null, "7,3 km")))), (0, _util.renderIf)(this.props.userAuth, _react.default.createElement("div", {
         className: "coins"
       }, _react.default.createElement("p", null, " 10.63 "))), _react.default.createElement("img", {
         className: (0, _util.classToggler)({
@@ -35091,13 +35101,9 @@ function (_React$Component) {
           'extrapadding': !this.props.userAuth
         }),
         src: "https://i.imgur.com/ey72AKX.png"
-      }), (0, _util.renderIf)(this.props.userAuth && this.state.showDropDown, _react.default.createElement("div", {
-        className: "distance"
-      }, _react.default.createElement("p", null, "7,3 km"))))), (0, _util.renderIf)(this.props.userAuth && this.state.showDropDown, _react.default.createElement("div", {
+      }))), (0, _util.renderIf)(this.props.userAuth && this.state.showDropDown, _react.default.createElement("div", {
         className: "navPrimary-dropdown"
-      }, _react.default.createElement("div", {
-        className: "navShadow"
-      }), _react.default.createElement("ul", {
+      }, _react.default.createElement("ul", {
         className: "navPrimary-menu"
       }, _react.default.createElement("li", {
         className: "navPrimary-li"
@@ -35112,7 +35118,7 @@ function (_React$Component) {
       }, _react.default.createElement("img", {
         src: "https://i.imgur.com/OPUUc13.png",
         className: "navIcons dbicon"
-      }), " DASHBOARD")), _react.default.createElement("li", {
+      }), " ", _react.default.createElement("span", null, "DASHBOARD"))), _react.default.createElement("li", {
         className: "navPrimary-li"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/map",
@@ -35125,8 +35131,8 @@ function (_React$Component) {
       }, _react.default.createElement("img", {
         src: "https://i.imgur.com/gxfbqpg.png",
         className: "navIcons mapicon"
-      }), " MAP")), _react.default.createElement("li", {
-        className: "navPrimary-li"
+      }), " ", _react.default.createElement("span", null, "MAP"))), _react.default.createElement("li", {
+        className: "navPrimary-li dc-li"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/dailychallenge",
         className: "navPrimary-li-text",
@@ -35138,7 +35144,11 @@ function (_React$Component) {
       }, _react.default.createElement("img", {
         src: "https://i.imgur.com/KgDT2nR.png",
         className: "navIcons dcicon"
-      }), " DAILY CHALLENGE")), _react.default.createElement("li", {
+      }), " ", _react.default.createElement("span", null, "DAILY"), " ", _react.default.createElement("br", {
+        className: "break"
+      }), " ", _react.default.createElement("span", {
+        className: "indentSmall"
+      }, "CHALLENGE"))), _react.default.createElement("li", {
         className: "navPrimary-li"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/mywallet",
@@ -35151,12 +35161,10 @@ function (_React$Component) {
       }, _react.default.createElement("img", {
         src: "https://i.imgur.com/Bnd3w7M.png",
         className: "navIcons walleticon"
-      }), " MY WALLET")), _react.default.createElement("li", {
-        className: "navPrimary-li"
-      }, _react.default.createElement("p", {
-        className: "navPrimary-li-text",
+      }), " ", _react.default.createElement("span", null, "MY WALLET")))), _react.default.createElement("p", {
+        className: "button oauthbuttonText lightBlueRev logoutButton",
         onClick: this.handleSignOut
-      }, "LOGOUT"))))), (0, _util.renderIf)(!this.props.userAunth, _react.default.createElement("div", {
+      }, _react.default.createElement("span", null, "LOG OUT")))), (0, _util.renderIf)(!this.props.userAuth, _react.default.createElement("div", {
         className: "ddContainer"
       }, _react.default.createElement("div", {
         id: "signInBanner"
@@ -42102,7 +42110,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54387" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63617" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
