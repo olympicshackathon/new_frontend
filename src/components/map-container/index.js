@@ -27,31 +27,15 @@ class MapContainer extends React.Component {
     componentWillMount() {
         userValidation(this.props);
     }
-
-    componentWillUnmount(){
-        this.mounted = false;
-    };
-
     componentDidMount() {
         this.mounted = true;
 
         if (this.mounted)
-        {
             this.setState({ currentLocation: this.props.currentLocation });
-            return this.props.googlePlacesFetch(this.props.currentLocation)
-                .then(results => this.searchNearbyCB(results))
-                .catch(logError);
-        }
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (prevProps.google !== this.props.google) {
-
-    //     }
-
-    // }
-
     onMapReady = (mapProps, map) => {
+        this.setState({ currentLocation: this.props.currentLocation });
         this.searchNearby(map, map.center);
 
         this.map = map;
@@ -98,28 +82,9 @@ class MapContainer extends React.Component {
         }
     };
 
-    searchNearbyCB = results => {
-        console.log('searchNearbyCB: ', results);
-        for (var i = 0; (i < results.length && i < 10); i++) {
-            let place = {
-                location: {
-                    lat: results[i].geometry.location.lat,
-                    lng: results[i].geometry.location.lng
-                },
-                name: results[i].name,
-                photos: []
-            };
-            if (results[i].photos)
-                results[i].photos.forEach(pho => place.photos.push(pho))
-            this.setState({ places: place });
-            // this.renderMarker(place);
-            this.createMarker(place);
-        }
-        console.log('state.places: ', this.state.places);
-    };
+
 
     renderMarker = (item) => {
-        this._map.setZoom(1);
         let {
           map, google, position, mapCenter
         } = this.props;
@@ -133,15 +98,6 @@ class MapContainer extends React.Component {
         };
         this.marker = new google.maps.Marker(pref);
     }
-
-    // locationPhotoFetchRequest = photoRef =>  {
-    //     console.log('photoRef argument: ', photoRef);
-    //     return superagent.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${process.env.__GAPI_KEY__}`)
-    //         .then(res => {
-    //             console.log('location photo reg res: ', res.body.results);
-    //             return res.body.results;
-    //         });
-    // };
 
     createMarker = item => {
         const { google } = this.props;
@@ -195,17 +151,12 @@ class MapContainer extends React.Component {
     render() {
         const style = { width: '100%', height: '100%' };
         return (
-            
-
             <Map google={this.props.google} zoom={14} center={this.state.currentLocation} 
-                //  onReady={this.onMapReady}
-                 onClick={this.onMapClicked} ref={(map) => this._map = map}>
-                 {/* <div ref='map' className='mapInnerDiv' /> */}
-                 
+                 onReady={this.onMapReady} onClick={this.onMapClicked}>   
                 <Marker onClick={this.onMarkerClick}
                         onMouseover={this.onMouseoverMarker}
                         name={'Current location'} 
-                        position={this.props.currentLocation}
+                        position={this.state.currentLocation}
                         icon={{
                             url: 'https://i.imgur.com/Oa8iJO5.png',
                             anchor: new google.maps.Point(8, 8),
@@ -240,3 +191,39 @@ const WrappedContainer = GoogleApiWrapper({
     apiKey: process.env.__GAPI_KEY__
  })(MapContainer);
  export default connect(mapStateToProps, mapDispatchToProps)(WrappedContainer);
+
+     // componentWillUnmount(){
+    //     this.mounted = false;
+    // };
+
+    // componentDidMount() {
+    //     this.mounted = true;
+
+    //     if (this.mounted)
+    //     {
+    //         this.setState({ currentLocation: this.props.currentLocation });
+    //         return this.props.googlePlacesFetch(this.props.currentLocation)
+    //             .then(results => this.searchNearbyCB(results))
+    //             .catch(logError);
+    //     }
+    // }
+
+    // searchNearbyCB = results => {
+    //     console.log('searchNearbyCB: ', results);
+    //     for (var i = 0; (i < results.length && i < 10); i++) {
+    //         let place = {
+    //             location: {
+    //                 lat: results[i].geometry.location.lat,
+    //                 lng: results[i].geometry.location.lng
+    //             },
+    //             name: results[i].name,
+    //             photos: []
+    //         };
+    //         if (results[i].photos)
+    //             results[i].photos.forEach(pho => place.photos.push(pho))
+    //         this.setState({ places: place });
+    //         // this.renderMarker(place);
+    //         this.createMarker(place);
+    //     }
+    //     console.log('state.places: ', this.state.places);
+    // };

@@ -1,4 +1,4 @@
-import superagent from 'superagent';
+const superagent = require('superagent');
 
 export const googlePlacesFetch = results => ({
   type: 'GOOGLE_PLACES_FETCH',

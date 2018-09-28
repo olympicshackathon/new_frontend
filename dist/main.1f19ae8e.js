@@ -31220,9 +31220,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.currentLocationFetchRequest = exports.googlePlacesFetchRequest = exports.currentLocationFetch = exports.googlePlacesFetch = void 0;
 
-var _superagent = _interopRequireDefault(require("superagent"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var superagent = require('superagent');
 
 var googlePlacesFetch = function googlePlacesFetch(results) {
   return {
@@ -31246,7 +31244,7 @@ var googlePlacesFetchRequest = function googlePlacesFetchRequest(location) {
   return function (dispatch) {
     console.log('location argument: ', location); // return superagent.get(`https://maps.googleapis.com/maps/api/js?key=${process.env.__GAPI_KEY__}&libraries=places`)
 
-    return _superagent.default.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=".concat(location.lat, ",").concat(location.lng, "&radius=1600&type=restaurant&key=").concat("AIzaSyBt-TN3afRiC1AZ_rLHPfQnbOqzGBU3hF4", "&libraries=places")).then(function (res) {
+    return superagent.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=".concat(location.lat, ",").concat(location.lng, "&radius=1600&type=restaurant&key=").concat("AIzaSyBt-TN3afRiC1AZ_rLHPfQnbOqzGBU3hF4", "&libraries=places")).then(function (res) {
       console.log('res: ', res.body.results);
       dispatch(googlePlacesFetch(res.body.results));
       return res.body.results;
@@ -41230,45 +41228,18 @@ function (_React$Component) {
       (0, _util.userValidation)(this.props);
     }
   }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.mounted = false;
-    }
-  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       this.mounted = true;
-
-      if (this.mounted) {
-        this.setState({
-          currentLocation: this.props.currentLocation
-        });
-        return this.props.googlePlacesFetch(this.props.currentLocation).then(function (results) {
-          return _this2.searchNearbyCB(results);
-        })["catch"](_util.logError);
-      }
-    } // componentDidUpdate(prevProps, prevState) {
-    //     if (prevProps.google !== this.props.google) {
-    //     }
-    // }
-    // locationPhotoFetchRequest = photoRef =>  {
-    //     console.log('photoRef argument: ', photoRef);
-    //     return superagent.get(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${process.env.__GAPI_KEY__}`)
-    //         .then(res => {
-    //             console.log('location photo reg res: ', res.body.results);
-    //             return res.body.results;
-    //         });
-    // };
-    // markers
+      if (this.mounted) this.setState({
+        currentLocation: this.props.currentLocation
+      });
+    } // markers
     // info window
 
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
       var style = {
         width: '100%',
         height: '100%'
@@ -41276,17 +41247,14 @@ function (_React$Component) {
       return _react.default.createElement(_googleMapsReact.Map, {
         google: this.props.google,
         zoom: 14,
-        center: this.state.currentLocation //  onReady={this.onMapReady}
-        ,
-        onClick: this.onMapClicked,
-        ref: function ref(map) {
-          return _this3._map = map;
-        }
+        center: this.state.currentLocation,
+        onReady: this.onMapReady,
+        onClick: this.onMapClicked
       }, _react.default.createElement(_googleMapsReact.Marker, {
         onClick: this.onMarkerClick,
         onMouseover: this.onMouseoverMarker,
         name: 'Current location',
-        position: this.props.currentLocation,
+        position: this.state.currentLocation,
         icon: {
           url: 'https://i.imgur.com/Oa8iJO5.png',
           anchor: new google.maps.Point(8, 8),
@@ -41305,33 +41273,37 @@ function (_React$Component) {
 }(_react.default.Component);
 
 var _initialiseProps = function _initialiseProps() {
-  var _this4 = this;
+  var _this2 = this;
 
   this.onMapReady = function (mapProps, map) {
-    _this4.searchNearby(map, map.center);
+    _this2.setState({
+      currentLocation: _this2.props.currentLocation
+    });
 
-    _this4.map = map;
+    _this2.searchNearby(map, map.center);
+
+    _this2.map = map;
 
     window.onresize = function () {
       var currCenter = map.getCenter();
 
-      _this4.props.google.maps.event.trigger(map, 'resize');
+      _this2.props.google.maps.event.trigger(map, 'resize');
 
       map.setCenter(currCenter);
     };
   };
 
   this.searchNearby = function (map, center) {
-    var google = _this4.props.google;
+    var google = _this2.props.google;
     var service = new google.maps.places.PlacesService(map);
     var request = {
       location: center,
       radius: '5000',
       type: ['store', 'political', 'locality', 'restaurant', 'lodging']
     };
-    service.nearbySearch(request, _this4.searchNearbyCallback);
+    service.nearbySearch(request, _this2.searchNearbyCallback);
 
-    _this4.setState({
+    _this2.setState({
       map: map
     });
   };
@@ -41351,11 +41323,11 @@ var _initialiseProps = function _initialiseProps() {
           return place.photos.push(pho);
         });
 
-        _this4.setState({
+        _this2.setState({
           places: place
         });
 
-        _this4.createMarker(place);
+        _this2.createMarker(place);
       };
 
       for (var i = 0; i < results.length; i++) {
@@ -41368,58 +41340,25 @@ var _initialiseProps = function _initialiseProps() {
     }
   };
 
-  this.searchNearbyCB = function (results) {
-    console.log('searchNearbyCB: ', results);
-
-    var _loop2 = function _loop2() {
-      var place = {
-        location: {
-          lat: results[i].geometry.location.lat,
-          lng: results[i].geometry.location.lng
-        },
-        name: results[i].name,
-        photos: []
-      };
-      if (results[i].photos) results[i].photos.forEach(function (pho) {
-        return place.photos.push(pho);
-      });
-
-      _this4.setState({
-        places: place
-      }); // this.renderMarker(place);
-
-
-      _this4.createMarker(place);
-    };
-
-    for (var i = 0; i < results.length && i < 10; i++) {
-      _loop2();
-    }
-
-    console.log('state.places: ', _this4.state.places);
-  };
-
   this.renderMarker = function (item) {
-    _this4._map.setZoom(1);
-
-    var _this4$props = _this4.props,
-        map = _this4$props.map,
-        google = _this4$props.google,
-        position = _this4$props.position,
-        mapCenter = _this4$props.mapCenter;
+    var _this2$props = _this2.props,
+        map = _this2$props.map,
+        google = _this2$props.google,
+        position = _this2$props.position,
+        mapCenter = _this2$props.mapCenter;
     var pos = item.location || mapCenter;
     position = new google.maps.LatLng(item.location.lat, item.location.lng);
     var pref = {
       map: map,
       position: position
     };
-    _this4.marker = new google.maps.Marker(pref);
+    _this2.marker = new google.maps.Marker(pref);
   };
 
   this.createMarker = function (item) {
-    var google = _this4.props.google;
+    var google = _this2.props.google;
     var marker = new google.maps.Marker({
-      map: _this4.state.map,
+      map: _this2.state.map,
       position: item.location,
       title: item.name,
       icon: 'http://www.clker.com/cliparts/E/9/d/W/E/9/google-maps-icon-blank-red.svg.hi.png'
@@ -41430,13 +41369,13 @@ var _initialiseProps = function _initialiseProps() {
     });
     google.maps.event.addListener(marker, 'click', function () {
       infowindow.setContent(contentString);
-      infowindow.open(_this4.state.map, _this4);
+      infowindow.open(_this2.state.map, _this2);
     });
   };
 
   this.onMapClicked = function (props) {
-    if (_this4.state.showingInfoWindow) {
-      _this4.setState({
+    if (_this2.state.showingInfoWindow) {
+      _this2.setState({
         showingInfoWindow: false,
         activeMarker: null
       });
@@ -41444,7 +41383,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onMarkerClick = function (props, marker, e) {
-    return _this4.setState({
+    return _this2.setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true
@@ -41457,7 +41396,7 @@ var _initialiseProps = function _initialiseProps() {
   this.windowHasOpened = function () {};
 
   this.onInfoWindowClose = function () {
-    return _this4.setState({
+    return _this2.setState({
       activeMarker: null,
       showingInfoWindow: false
     });
@@ -41497,7 +41436,39 @@ var WrappedContainer = (0, _googleMapsReact.GoogleApiWrapper)({
   apiKey: "AIzaSyBt-TN3afRiC1AZ_rLHPfQnbOqzGBU3hF4"
 })(MapContainer);
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WrappedContainer);
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WrappedContainer); // componentWillUnmount(){
+//     this.mounted = false;
+// };
+// componentDidMount() {
+//     this.mounted = true;
+//     if (this.mounted)
+//     {
+//         this.setState({ currentLocation: this.props.currentLocation });
+//         return this.props.googlePlacesFetch(this.props.currentLocation)
+//             .then(results => this.searchNearbyCB(results))
+//             .catch(logError);
+//     }
+// }
+// searchNearbyCB = results => {
+//     console.log('searchNearbyCB: ', results);
+//     for (var i = 0; (i < results.length && i < 10); i++) {
+//         let place = {
+//             location: {
+//                 lat: results[i].geometry.location.lat,
+//                 lng: results[i].geometry.location.lng
+//             },
+//             name: results[i].name,
+//             photos: []
+//         };
+//         if (results[i].photos)
+//             results[i].photos.forEach(pho => place.photos.push(pho))
+//         this.setState({ places: place });
+//         // this.renderMarker(place);
+//         this.createMarker(place);
+//     }
+//     console.log('state.places: ', this.state.places);
+// };
+
 
 exports.default = _default;
 },{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","react-dom":"../node_modules/react-dom/index.js","google-maps-react":"../node_modules/google-maps-react/dist/index.js","prop-types":"../node_modules/prop-types/index.js","superagent":"../node_modules/superagent/lib/client.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../helpers/modal":"components/helpers/modal/index.js","./../../lib/util.js":"lib/util.js"}],"components/landing-container/index.js":[function(require,module,exports) {
@@ -42110,7 +42081,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63617" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65067" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
