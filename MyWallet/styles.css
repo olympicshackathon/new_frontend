@@ -1,0 +1,20 @@
+My Wallet div
+<div style="
+    width: 100vw;
+    height: 50px;
+    box-shadow: 0px 0px 8px 1px #000000;"
+    "<div id="signinbanner"><p style="
+    width: 100vw;
+    height: 50px;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    padding: 15px;">
+    My wallet</p></div></div>
+
+Wallet amount div
+<div class="oauthDiv"><div class="oauthButtonContainer"><p style="font-size: 10px; font-weight: 200; text-align: center; padding-top: 15px;">Congrats, you've got</p></div><div class="oauthButtonContainer"><p style="font-size: 15px; font-weight: Bold; text-align: center; font-style: italic; color: #008FD7">10.63</p></div></div>
+
+<img src="/src/img/Card.png" alt="Girl in a jacket" style="width:100vw;height:200px;">
+
+<img src="/src/img/Payment.png" alt="Girl in a jacket" style="width:100vw;height:200px;">

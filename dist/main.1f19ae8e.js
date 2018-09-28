@@ -31246,7 +31246,7 @@ var googlePlacesFetchRequest = function googlePlacesFetchRequest(location) {
   return function (dispatch) {
     console.log('location argument: ', location); // return superagent.get(`https://maps.googleapis.com/maps/api/js?key=${process.env.__GAPI_KEY__}&libraries=places`)
 
-    return _superagent.default.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=".concat(location.lat, ",").concat(location.lng, "&radius=1600&type=restaurant&key=").concat("AIzaSyBt-TN3afRiC1AZ_rLHPfQnbOqzGBU3hF4", "&libraries=places")).then(function (res) {
+    return _superagent.default.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=".concat(location.lat, ",").concat(location.lng, "&radius=1600&type=restaurant&key=").concat(undefined, "&libraries=places")).then(function (res) {
       console.log('res: ', res.body.results);
       dispatch(googlePlacesFetch(res.body.results));
       return res.body.results;
@@ -41467,7 +41467,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 var WrappedContainer = (0, _googleMapsReact.GoogleApiWrapper)({
-  apiKey: "AIzaSyBt-TN3afRiC1AZ_rLHPfQnbOqzGBU3hF4"
+  apiKey: undefined
 })(MapContainer);
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WrappedContainer);
@@ -42083,7 +42083,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50154" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50156" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
