@@ -52,7 +52,7 @@ class MapContainer extends React.Component {
         const request = {
           location: center,
           radius: '5000',
-          type: ['store', 'political', 'locality', 'restaurant', 'lodging']
+          type: ['art_gallery', 'restaurant', 'bar', 'museum']
         };
     
         service.nearbySearch(request, this.searchNearbyCallback);
@@ -75,6 +75,7 @@ class MapContainer extends React.Component {
                     results[i].photos.forEach(pho => place.photos.push(pho));
                 this.setState({ places: place });
                 this.createMarker(place);
+                // this.renderMarker(place);
             }
             if (pagination.hasNextPage) {
                 pagination.nextPage();
@@ -89,7 +90,7 @@ class MapContainer extends React.Component {
           map, google, position, mapCenter
         } = this.props;
   
-        let pos = item.location || mapCenter;
+        let pos = item.location;
         position = new google.maps.LatLng(item.location.lat, item.location.lng);
   
         const pref = {
@@ -101,12 +102,7 @@ class MapContainer extends React.Component {
 
     createMarker = item => {
         const { google } = this.props;
-        var marker = new google.maps.Marker({
-            map: this.state.map,
-            position: item.location,
-            title: item.name,
-            icon: 'http://www.clker.com/cliparts/E/9/d/W/E/9/google-maps-icon-blank-red.svg.hi.png'
-        });
+
         var contentString = '<div id="content">' +
             '<div id="siteNotice">' +
             '</div>' +
@@ -119,10 +115,21 @@ class MapContainer extends React.Component {
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
+
+        var marker = new google.maps.Marker({
+            map: this.state.map,
+            position: item.location,
+            title: item.name,
+            icon: {
+                url: 'http://www.clker.com/cliparts/E/9/d/W/E/9/google-maps-icon-blank-red.svg.hi.png',
+                anchor: new google.maps.Point(16, 16),
+                scaledSize: new google.maps.Size(32, 32)
+            },
+        });
     
         google.maps.event.addListener(marker, 'click', () => {
             infowindow.setContent(contentString);
-            infowindow.open(this.state.map, this);
+            infowindow.open(this.state.map, marker);
         });
     }
 

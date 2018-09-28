@@ -41299,7 +41299,7 @@ var _initialiseProps = function _initialiseProps() {
     var request = {
       location: center,
       radius: '5000',
-      type: ['store', 'political', 'locality', 'restaurant', 'lodging']
+      type: ['art_gallery', 'restaurant', 'bar', 'museum']
     };
     service.nearbySearch(request, _this2.searchNearbyCallback);
 
@@ -41327,7 +41327,8 @@ var _initialiseProps = function _initialiseProps() {
           places: place
         });
 
-        _this2.createMarker(place);
+        _this2.createMarker(place); // this.renderMarker(place);
+
       };
 
       for (var i = 0; i < results.length; i++) {
@@ -41346,7 +41347,7 @@ var _initialiseProps = function _initialiseProps() {
         google = _this2$props.google,
         position = _this2$props.position,
         mapCenter = _this2$props.mapCenter;
-    var pos = item.location || mapCenter;
+    var pos = item.location;
     position = new google.maps.LatLng(item.location.lat, item.location.lng);
     var pref = {
       map: map,
@@ -41357,19 +41358,23 @@ var _initialiseProps = function _initialiseProps() {
 
   this.createMarker = function (item) {
     var google = _this2.props.google;
-    var marker = new google.maps.Marker({
-      map: _this2.state.map,
-      position: item.location,
-      title: item.name,
-      icon: 'http://www.clker.com/cliparts/E/9/d/W/E/9/google-maps-icon-blank-red.svg.hi.png'
-    });
     var contentString = '<div id="content">' + '<div id="siteNotice">' + '</div>' + '<h1 id="firstHeading" class="firstHeading">' + item.name + '</h1>' + '<div id="bodyContent">' + '<img src="' + item.photos[0] + '"/>' + '</div>' + '</div>';
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
+    var marker = new google.maps.Marker({
+      map: _this2.state.map,
+      position: item.location,
+      title: item.name,
+      icon: {
+        url: 'http://www.clker.com/cliparts/E/9/d/W/E/9/google-maps-icon-blank-red.svg.hi.png',
+        anchor: new google.maps.Point(16, 16),
+        scaledSize: new google.maps.Size(32, 32)
+      }
+    });
     google.maps.event.addListener(marker, 'click', function () {
       infowindow.setContent(contentString);
-      infowindow.open(_this2.state.map, _this2);
+      infowindow.open(_this2.state.map, marker);
     });
   };
 
@@ -42081,7 +42086,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65067" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57773" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
