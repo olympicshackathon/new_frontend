@@ -41278,6 +41278,10 @@ function (_React$Component) {
       }, _react.default.createElement("p", null, this.state.selectedPlace.name))), (0, _util.renderIf)(this.state.current && this.state.current.photos && this.state.showiw, _react.default.createElement("div", {
         className: "infowindow"
       }, _react.default.createElement("div", {
+        className: "iwpic"
+      }, _react.default.createElement("img", {
+        src: this.state.current.photos
+      })), _react.default.createElement("div", {
         className: "iwcontent"
       }, _react.default.createElement("p", {
         className: "iwname"
@@ -41344,14 +41348,20 @@ var _initialiseProps = function _initialiseProps() {
           address: results[i].vicinity,
           name: results[i].name,
           type: results[i].types[0],
-          photos: []
-        };
-        if (results[i].photos) results[i].photos.forEach(function (pho) {
-          return place.photos.push(pho.getUrl({
+          photos: results[i].photos[0].getUrl({
             'maxWidth': 600,
             'maxHeight': 400
-          }));
-        });
+          })
+        };
+
+        while (!place.photos && results[i].photos) {
+          results[i].photos.forEach(function (pho) {
+            return place.photos.push(pho.getUrl({
+              'maxWidth': 600,
+              'maxHeight': 400
+            }));
+          });
+        }
 
         _this2.setState({
           places: _toConsumableArray(_this2.state.places).concat([place])
@@ -41407,6 +41417,8 @@ var _initialiseProps = function _initialiseProps() {
       showiw: true,
       current: _this2.state.places[arrpos]
     });
+
+    console.log('current: ', _this2.state.current);
   };
 
   this.onMapClicked = function (props) {
@@ -42129,7 +42141,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64967" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56715" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

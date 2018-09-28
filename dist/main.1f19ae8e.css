@@ -1456,4 +1456,51 @@ input:active, input:focus {
   bottom: 0;
   right: 0;
   height: 100px;
-  z-index: 999; }
+  z-index: 999;
+  background-color: #153F90; }
+
+.iwpic {
+  display: inline-block;
+  margin: 10px 0;
+  width: 40vw;
+  text-align: center; }
+  .iwpic img {
+    border-radius: 50%;
+    max-width: 26vw;
+    max-height: 80px; }
+
+.iwcontent {
+  width: 60vw;
+  margin: 10px 0;
+  position: absolute;
+  right: 0;
+  top: 10px; }
+  .iwcontent .iwname {
+    color: #FFF;
+    font-size: 16PX;
+    font-weight: 500;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 35px; }
+    .iwcontent .iwname .iwtype {
+      color: #008FD7;
+      font-size: 16PX;
+      font-weight: 500; }
+  .iwcontent .iwaddress {
+    color: #fff;
+    font-size: 12px;
+    position: relative;
+    padding-left: 30px;
+    line-height: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+    .iwcontent .iwaddress img {
+      height: 24px;
+      margin-right: 3px;
+      position: absolute;
+      left: 0; }

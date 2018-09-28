@@ -74,9 +74,9 @@ class MapContainer extends React.Component {
                     address: results[i].vicinity,
                     name: results[i].name,
                     type: results[i].types[0],
-                    photos: []
+                    photos: results[i].photos[0].getUrl({'maxWidth': 600, 'maxHeight': 400}),
                 };
-                if (results[i].photos)
+                while (!place.photos && results[i].photos)
                     results[i].photos.forEach(pho => place.photos.push(pho.getUrl({'maxWidth': 600, 'maxHeight': 400})));
                 this.setState({ places: [...this.state.places, place ] });
                 this.createMarker(place, i);
@@ -122,6 +122,7 @@ class MapContainer extends React.Component {
     }
     showiw = arrpos => {
         this.setState({showiw: true, current: this.state.places[arrpos] });
+        console.log('current: ', this.state.current);
     }
 
     onMapClicked = props => {
@@ -168,10 +169,10 @@ class MapContainer extends React.Component {
                 </InfoWindow>
             </Map>
             {renderIf(this.state.current && this.state.current.photos && this.state.showiw,
-                <div className="infowindow"> 
-                    {/* <div className="iwpic"> 
-                        <img src={this.state.current.photos[0]}/> 
-                    </div>  */}
+                <div className="infowindow">
+                    <div className="iwpic"> 
+                        <img src={this.state.current.photos}/> 
+                    </div>  
                     <div className="iwcontent"> 
                         <p className="iwname">  {this.state.current.name}  <span className="iwtype">  {this.state.current.type}  </span> </p> 
                         <p className="iwaddress">  <img src="https://i.imgur.com/icxBvfa.png" className="iwballoon"/>  {this.state.current.address}   </p> 

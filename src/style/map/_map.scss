@@ -18,4 +18,63 @@
     right: 0;
     height: 100px;
     z-index: 999;
+    background-color: #153F90;
 }
+.iwpic {
+    display:inline-block;
+    margin: 10px 0;
+    width: 40vw;
+    text-align: center;
+  
+    img {
+      border-radius: 50%;
+      max-width:26vw;
+      max-height:80px;
+    }
+  }
+  .iwcontent {
+    width: 60vw;
+    margin: 10px 0;
+    position: absolute;
+    right: 0;
+    top: 10px;
+  
+    .iwname {
+      color: #FFF;
+      font-size: 16PX;
+      font-weight: 500;
+      margin-right: 3px;
+      margin-bottom: 5px;
+      display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 35px;
+  
+      .iwtype {
+        color: #008FD7;
+        font-size: 16PX;
+        font-weight: 500;
+      }
+    }
+  
+    .iwaddress {
+      color: #fff;
+      font-size: 12px;
+      position: relative;
+      padding-left: 30px;
+      line-height: 24px;
+      white-space: nowrap; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      img {
+        height: 24px;
+        margin-right: 3px;
+        position: absolute; 
+        left: 0;
+      }
+    }
+  }
