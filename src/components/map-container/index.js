@@ -22,6 +22,8 @@ class MapContainer extends React.Component {
           places: [],
           map: null,
           currentLocation: {},
+          showiw: false,
+          current: {},
         }
     }
     componentWillMount() {
@@ -60,60 +62,50 @@ class MapContainer extends React.Component {
     };
 
     searchNearbyCallback = (results, status, pagination) => {
+        console.log('results: ', results);
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
+            for (var i = 0; i < results.length && i < 10; i++) {
 
                 let place = {
                     location: {
                         lat: results[i].geometry.location.lat(),
                         lng: results[i].geometry.location.lng()
                     },
+                    address: results[i].vicinity,
                     name: results[i].name,
+                    type: results[i].types[0],
                     photos: []
                 };
                 if (results[i].photos)
                     results[i].photos.forEach(pho => place.photos.push(pho.getUrl({'maxWidth': 600, 'maxHeight': 400})));
-                this.setState({ places: place });
-                this.createMarker(place);
+                this.setState({ places: [...this.state.places, place ] });
+                this.createMarker(place, i);
             }
-            if (pagination.hasNextPage) {
-                pagination.nextPage();
-            }
+            // if (pagination.hasNextPage) {
+            //     pagination.nextPage();
+            // }
         }
+        console.log('places: ', this.state.places);
     };
 
-
-
-    renderMarker = (item) => {
-        let {
-          map, google, position, mapCenter
-        } = this.props;
-  
-        let pos = item.location;
-        position = new google.maps.LatLng(item.location.lat, item.location.lng);
-  
-        const pref = {
-          map: map,
-          position: position
-        };
-        this.marker = new google.maps.Marker(pref);
-    }
-
-    createMarker = item => {
+    createMarker = (item, i) => {
         const { google } = this.props;
 
-        var contentString = '<div id="content">' +
-            '<div id="siteNotice">' +
-            '</div>' +
-            '<h1 id="firstHeading" class="firstHeading">' + item.name + '</h1>' +
-            '<div id="bodyContent">' +
-            '<img src="' + item.photos[0] + '"/>' +
-            '</div>' +
-            '</div>';
+        // var contentString = 
+        // '<div id="content" class="infowindow">' +
+        //     '<div id="siteNotice">' + '</div>' +
+        //     '<div class="iwpic">' +
+        //         '<img src="' + item.photos[0] + '"/>' +
+        //     '</div>' +
+        //     '<div class="iwcontent">' +
+        //         '<p class="iwname">' + item.name + '<span class="iwtype">' + item.type + '</span> </p>' +
+        //         '<p class="iwaddress">' + '<img src="https://i.imgur.com/icxBvfa.png" class="iwballoon"/>' + item.address +  '</p>' +
+        //     '</div>' +
+        // '</div>';
     
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
+        // var infowindow = new google.maps.InfoWindow({
+        //     content: contentString
+        // });
 
         var marker = new google.maps.Marker({
             map: this.state.map,
@@ -125,11 +117,11 @@ class MapContainer extends React.Component {
                 scaledSize: new google.maps.Size(32, 32)
             },
         });
-    
-        google.maps.event.addListener(marker, 'click', () => {
-            infowindow.setContent(contentString);
-            infowindow.open(this.state.map, marker);
-        });
+
+        marker.addListener('click', () => this.showiw(i));
+    }
+    showiw = arrpos => {
+        this.setState({showiw: true, current: this.state.places[arrpos] });
     }
 
     onMapClicked = props => {
@@ -157,6 +149,7 @@ class MapContainer extends React.Component {
     render() {
         const style = { width: '100%', height: '100%' };
         return (
+            <div>
             <Map google={this.props.google} zoom={14} center={this.state.currentLocation} 
                  onReady={this.onMapReady} onClick={this.onMapClicked}>   
                 <Marker onClick={this.onMarkerClick}
@@ -174,6 +167,18 @@ class MapContainer extends React.Component {
                     <p>{this.state.selectedPlace.name}</p>
                 </InfoWindow>
             </Map>
+            {renderIf(this.state.current && this.state.current.photos && this.state.showiw,
+                <div className="infowindow"> 
+                    {/* <div className="iwpic"> 
+                        <img src={this.state.current.photos[0]}/> 
+                    </div>  */}
+                    <div className="iwcontent"> 
+                        <p className="iwname">  {this.state.current.name}  <span className="iwtype">  {this.state.current.type}  </span> </p> 
+                        <p className="iwaddress">  <img src="https://i.imgur.com/icxBvfa.png" className="iwballoon"/>  {this.state.current.address}   </p> 
+                    </div> 
+                </div>
+            )}
+            </div>
         )
     }
 }
@@ -233,3 +238,18 @@ const WrappedContainer = GoogleApiWrapper({
     //     }
     //     console.log('state.places: ', this.state.places);
     // };
+
+    // renderMarker = (item) => {
+    //     let {
+    //       map, google, position, mapCenter
+    //     } = this.props;
+  
+    //     let pos = item.location;
+    //     position = new google.maps.LatLng(item.location.lat, item.location.lng);
+  
+    //     const pref = {
+    //       map: map,
+    //       position: position
+    //     };
+    //     this.marker = new google.maps.Marker(pref);
+    // }

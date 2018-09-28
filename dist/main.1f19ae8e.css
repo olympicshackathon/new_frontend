@@ -1438,23 +1438,9 @@ input:active, input:focus {
     top: 8px;
     left: 10px; }
 
-.toolbar {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  text-align: right;
-  color: white; }
-
-.toolbar span {
-  color: white;
-  cursor: pointer; }
-
 #map {
   width: 100vw;
-  height: 100vh; }
+  height: calc((100vh - 50px)); }
 
 .small {
   width: 10px;
@@ -1462,4 +1448,12 @@ input:active, input:focus {
 
 .mapInnerDiv {
   width: 100vw;
-  height: 100vh; }
+  height: calc((100vh - 50px)); }
+
+.infowindow {
+  position: fixed !important;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100px;
+  z-index: 999; }

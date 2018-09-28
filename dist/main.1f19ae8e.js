@@ -41179,6 +41179,14 @@ var _util = require("./../../lib/util.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41217,7 +41225,9 @@ function (_React$Component) {
       selectedPlace: {},
       places: [],
       map: null,
-      currentLocation: {}
+      currentLocation: {},
+      showiw: false,
+      current: {}
     };
     return _this;
   }
@@ -41244,7 +41254,7 @@ function (_React$Component) {
         width: '100%',
         height: '100%'
       };
-      return _react.default.createElement(_googleMapsReact.Map, {
+      return _react.default.createElement("div", null, _react.default.createElement(_googleMapsReact.Map, {
         google: this.props.google,
         zoom: 14,
         center: this.state.currentLocation,
@@ -41265,7 +41275,20 @@ function (_React$Component) {
         marker: this.state.activeMarker,
         visible: this.state.showingInfoWindow,
         onOpen: this.windowHasOpened
-      }, _react.default.createElement("p", null, this.state.selectedPlace.name)));
+      }, _react.default.createElement("p", null, this.state.selectedPlace.name))), (0, _util.renderIf)(this.state.current && this.state.current.photos && this.state.showiw, _react.default.createElement("div", {
+        className: "infowindow"
+      }, _react.default.createElement("div", {
+        className: "iwcontent"
+      }, _react.default.createElement("p", {
+        className: "iwname"
+      }, "  ", this.state.current.name, "  ", _react.default.createElement("span", {
+        className: "iwtype"
+      }, "  ", this.state.current.type, "  "), " "), _react.default.createElement("p", {
+        className: "iwaddress"
+      }, "  ", _react.default.createElement("img", {
+        src: "https://i.imgur.com/icxBvfa.png",
+        className: "iwballoon"
+      }), "  ", this.state.current.address, "   ")))));
     }
   }]);
 
@@ -41309,6 +41332,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.searchNearbyCallback = function (results, status, pagination) {
+    console.log('results: ', results);
+
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       var _loop = function _loop() {
         var place = {
@@ -41316,7 +41341,9 @@ var _initialiseProps = function _initialiseProps() {
             lat: results[i].geometry.location.lat(),
             lng: results[i].geometry.location.lng()
           },
+          address: results[i].vicinity,
           name: results[i].name,
+          type: results[i].types[0],
           photos: []
         };
         if (results[i].photos) results[i].photos.forEach(function (pho) {
@@ -41327,43 +41354,39 @@ var _initialiseProps = function _initialiseProps() {
         });
 
         _this2.setState({
-          places: place
+          places: _toConsumableArray(_this2.state.places).concat([place])
         });
 
-        _this2.createMarker(place);
+        _this2.createMarker(place, i);
       };
 
-      for (var i = 0; i < results.length; i++) {
+      for (var i = 0; i < results.length && i < 10; i++) {
         _loop();
-      }
+      } // if (pagination.hasNextPage) {
+      //     pagination.nextPage();
+      // }
 
-      if (pagination.hasNextPage) {
-        pagination.nextPage();
-      }
     }
+
+    console.log('places: ', _this2.state.places);
   };
 
-  this.renderMarker = function (item) {
-    var _this2$props = _this2.props,
-        map = _this2$props.map,
-        google = _this2$props.google,
-        position = _this2$props.position,
-        mapCenter = _this2$props.mapCenter;
-    var pos = item.location;
-    position = new google.maps.LatLng(item.location.lat, item.location.lng);
-    var pref = {
-      map: map,
-      position: position
-    };
-    _this2.marker = new google.maps.Marker(pref);
-  };
+  this.createMarker = function (item, i) {
+    var google = _this2.props.google; // var contentString = 
+    // '<div id="content" class="infowindow">' +
+    //     '<div id="siteNotice">' + '</div>' +
+    //     '<div class="iwpic">' +
+    //         '<img src="' + item.photos[0] + '"/>' +
+    //     '</div>' +
+    //     '<div class="iwcontent">' +
+    //         '<p class="iwname">' + item.name + '<span class="iwtype">' + item.type + '</span> </p>' +
+    //         '<p class="iwaddress">' + '<img src="https://i.imgur.com/icxBvfa.png" class="iwballoon"/>' + item.address +  '</p>' +
+    //     '</div>' +
+    // '</div>';
+    // var infowindow = new google.maps.InfoWindow({
+    //     content: contentString
+    // });
 
-  this.createMarker = function (item) {
-    var google = _this2.props.google;
-    var contentString = '<div id="content">' + '<div id="siteNotice">' + '</div>' + '<h1 id="firstHeading" class="firstHeading">' + item.name + '</h1>' + '<div id="bodyContent">' + '<img src="' + item.photos[0] + '"/>' + '</div>' + '</div>';
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
     var marker = new google.maps.Marker({
       map: _this2.state.map,
       position: item.location,
@@ -41374,9 +41397,15 @@ var _initialiseProps = function _initialiseProps() {
         scaledSize: new google.maps.Size(32, 32)
       }
     });
-    google.maps.event.addListener(marker, 'click', function () {
-      infowindow.setContent(contentString);
-      infowindow.open(_this2.state.map, marker);
+    marker.addListener('click', function () {
+      return _this2.showiw(i);
+    });
+  };
+
+  this.showiw = function (arrpos) {
+    _this2.setState({
+      showiw: true,
+      current: _this2.state.places[arrpos]
     });
   };
 
@@ -41475,6 +41504,18 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Wra
 //     }
 //     console.log('state.places: ', this.state.places);
 // };
+// renderMarker = (item) => {
+//     let {
+//       map, google, position, mapCenter
+//     } = this.props;
+//     let pos = item.location;
+//     position = new google.maps.LatLng(item.location.lat, item.location.lng);
+//     const pref = {
+//       map: map,
+//       position: position
+//     };
+//     this.marker = new google.maps.Marker(pref);
+// }
 
 
 exports.default = _default;
@@ -42088,7 +42129,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63412" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64967" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
