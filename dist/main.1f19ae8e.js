@@ -41320,15 +41320,17 @@ var _initialiseProps = function _initialiseProps() {
           photos: []
         };
         if (results[i].photos) results[i].photos.forEach(function (pho) {
-          return place.photos.push(pho);
+          return place.photos.push(pho.getUrl({
+            'maxWidth': 600,
+            'maxHeight': 400
+          }));
         });
 
         _this2.setState({
           places: place
         });
 
-        _this2.createMarker(place); // this.renderMarker(place);
-
+        _this2.createMarker(place);
       };
 
       for (var i = 0; i < results.length; i++) {
@@ -42086,7 +42088,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57773" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63412" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

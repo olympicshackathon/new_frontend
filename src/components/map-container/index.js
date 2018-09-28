@@ -72,10 +72,9 @@ class MapContainer extends React.Component {
                     photos: []
                 };
                 if (results[i].photos)
-                    results[i].photos.forEach(pho => place.photos.push(pho));
+                    results[i].photos.forEach(pho => place.photos.push(pho.getUrl({'maxWidth': 600, 'maxHeight': 400})));
                 this.setState({ places: place });
                 this.createMarker(place);
-                // this.renderMarker(place);
             }
             if (pagination.hasNextPage) {
                 pagination.nextPage();
