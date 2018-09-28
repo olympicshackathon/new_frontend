@@ -34789,7 +34789,7 @@ function (_React$Component) {
 
       _this.setState(_defineProperty({}, name, value));
 
-      if (_this.props.authFormAction === 'Sign Up' && name === 'username') {
+      if (_this.props.authFormAction === 'Register' && name === 'username') {
         _this.usernameCheckAvailable(value);
       }
     };
@@ -34877,9 +34877,11 @@ function (_React$Component) {
           'form userauth-form': true,
           'error': this.state.error && this.state.submitted
         })
-      }, (0, _util.renderIf)(this.props.authFormAction === 'Sign Up', _react.default.createElement("div", null, _react.default.createElement("h2", {
+      }, (0, _util.renderIf)(this.props.authFormAction === 'Register', _react.default.createElement("div", null, _react.default.createElement("h2", {
         className: "title"
-      }, "SIGN UP"), _react.default.createElement("input", {
+      }, "Register"), _react.default.createElement("div", {
+        className: "iconInputDiv"
+      }, _react.default.createElement("input", {
         className: (0, _util.classToggler)({
           error: emailError
         }),
@@ -34890,12 +34892,17 @@ function (_React$Component) {
         onChange: this.handleChange,
         onFocus: this.handleFocus,
         onBlur: this.handleBlur
-      }), _react.default.createElement(_tooltip.default, {
+      }), _react.default.createElement("img", {
+        className: "envelopeIcon",
+        src: "https://i.imgur.com/oXi4RWq.png"
+      })), _react.default.createElement(_tooltip.default, {
         message: emailError,
         show: focused === 'email' || submitted
-      }))), (0, _util.renderIf)(this.props.authFormAction !== 'Sign Up', _react.default.createElement("div", null, _react.default.createElement("h2", {
+      }))), (0, _util.renderIf)(this.props.authFormAction !== 'Register', _react.default.createElement("div", null, _react.default.createElement("h2", {
         className: "title"
-      }, "SIGN IN"))), _react.default.createElement("input", {
+      }, "Sign In"))), _react.default.createElement("div", {
+        className: "iconInputDiv"
+      }, _react.default.createElement("input", {
         className: (0, _util.classToggler)({
           error: usernameError || !usernameAvailable
         }),
@@ -34906,14 +34913,19 @@ function (_React$Component) {
         onChange: this.handleChange,
         onFocus: this.handleFocus,
         onBlur: this.handleBlur
-      }), _react.default.createElement(_tooltip.default, {
+      }), _react.default.createElement("img", {
+        className: "envelopeIcon",
+        src: "https://i.imgur.com/UCainXV.png"
+      })), _react.default.createElement(_tooltip.default, {
         message: usernameError,
         show: focused === 'username' || submitted
-      }), (0, _util.renderIf)(username && this.props.authFormAction === 'Sign Up', _react.default.createElement("div", {
+      }), (0, _util.renderIf)(username && this.props.authFormAction === 'Register', _react.default.createElement("div", {
         className: "username-availability-outer"
       }, _react.default.createElement("p", {
         className: "username-availability"
-      }, username, " ", usernameAvailable ? 'is available.' : 'is not available.'))), _react.default.createElement("input", {
+      }, username, " ", usernameAvailable ? 'is available.' : 'is not available.'))), _react.default.createElement("div", {
+        className: "iconInputDiv"
+      }, _react.default.createElement("input", {
         className: (0, _util.classToggler)({
           passwordError: passwordError
         }),
@@ -34924,15 +34936,16 @@ function (_React$Component) {
         onChange: this.handleChange,
         onFocus: this.handleFocus,
         onBlur: this.handleBlur
-      }), _react.default.createElement(_tooltip.default, {
+      }), _react.default.createElement("img", {
+        className: "lockIcon",
+        src: "https://i.imgur.com/LpyEKUz.png"
+      })), _react.default.createElement(_tooltip.default, {
         message: passwordError,
         show: focused === 'password' || submitted
-      }), _react.default.createElement("div", {
-        className: "buttonAuthFormParentDiv"
-      }, _react.default.createElement("button", {
-        className: "formButton",
+      }), _react.default.createElement("button", {
+        className: "button lightBlue oauthbuttonText",
         type: "submit"
-      }, " ", this.props.authFormAction, " ")));
+      }, " ", this.props.authFormAction, " "));
     }
   }]);
 
@@ -35039,7 +35052,7 @@ function (_React$Component) {
 
     _this.state = {
       showDropDown: false,
-      authFormAction: 'Sign Up'
+      authFormAction: 'Register'
     };
     return _this;
   }
@@ -35055,7 +35068,7 @@ function (_React$Component) {
       var _this2 = this;
 
       var profileLink = this.props.userProfile && this.props.userProfile._id ? "/user/".concat(this.props.userProfile._id) : '';
-      var handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
+      var handleComplete = this.state.authFormAction === 'Register' ? this.handleSignup : this.handleSignin;
       return _react.default.createElement("header", null, _react.default.createElement("nav", null, _react.default.createElement("div", {
         className: "navPrimary",
         onClick: function onClick() {
@@ -35143,29 +35156,33 @@ function (_React$Component) {
       }, _react.default.createElement("p", {
         className: "navPrimary-li-text",
         onClick: this.handleSignOut
-      }, "LOGOUT"))))), (0, _util.renderIf)(!this.props.userAuth, _react.default.createElement("div", null, _react.default.createElement("div", {
+      }, "LOGOUT"))))), (0, _util.renderIf)(!this.props.userAunth, _react.default.createElement("div", {
+        className: "ddContainer"
+      }, _react.default.createElement("div", {
         id: "signInBanner"
-      }, _react.default.createElement("p", null, "Sign in")), _react.default.createElement("div", {
+      }, (0, _util.renderIf)(this.state.authFormAction == 'Sign In', _react.default.createElement("p", null, "Sign in")), (0, _util.renderIf)(this.state.authFormAction == 'Register', _react.default.createElement("p", null, "Register"))), _react.default.createElement("div", {
         className: "oauthDiv"
       }, _react.default.createElement("div", {
         className: "oauthButtonContainer"
       }, _react.default.createElement("button", {
-        className: "oauthButton"
-      }, _react.default.createElement("span", null, _react.default.createElement("img", {
+        className: "button randomBlue"
+      }, _react.default.createElement("img", {
         src: "https://i.imgur.com/8SuZVDb.png"
-      })), " ", _react.default.createElement("span", {
+      }), _react.default.createElement("span", {
         className: "oauthbuttonText"
       }, "Sign in with Facebook"))), _react.default.createElement("div", {
         className: "oauthButtonContainer"
       }, _react.default.createElement("button", {
-        className: "oauthButton"
-      }, _react.default.createElement("span", null, _react.default.createElement("img", {
+        className: "button randomGray"
+      }, _react.default.createElement("img", {
         src: "https://i.imgur.com/1oNQY1E.png"
-      })), " ", _react.default.createElement("span", {
+      }), " ", _react.default.createElement("span", {
         className: "oauthbuttonText"
       }, "Sign in with Google")))), _react.default.createElement("div", {
         className: "orLine"
-      }, _react.default.createElement("p", null, "OR"), _react.default.createElement("p", {
+      }, _react.default.createElement("p", {
+        className: "or"
+      }, "OR"), _react.default.createElement("p", {
         className: "underline"
       }, " ")), _react.default.createElement("div", {
         className: "navForm-div"
@@ -35174,20 +35191,22 @@ function (_React$Component) {
         onComplete: handleComplete
       }), _react.default.createElement("div", {
         className: "userauth-buttons"
-      }, (0, _util.renderIf)(this.state.authFormAction === 'Sign Up', _react.default.createElement("button", {
-        className: "grayButton",
+      }, (0, _util.renderIf)(this.state.authFormAction === 'Register', _react.default.createElement("div", null, _react.default.createElement("p", {
+        className: "question"
+      }, "Already have an account?"), _react.default.createElement("button", {
+        className: "button oauthbuttonText lightGray",
         onClick: function onClick() {
           return _this2.setState({
             authFormAction: 'Sign In'
           });
         }
-      }, "Sign In")), (0, _util.renderIf)(this.state.authFormAction === 'Sign In', _react.default.createElement("div", null, _react.default.createElement("p", {
-        className: "accountMessage"
-      }, "Don't have an account yet?"), _react.default.createElement("button", {
-        className: "grayButton",
+      }, "Sign In"))), (0, _util.renderIf)(this.state.authFormAction === 'Sign In', _react.default.createElement("div", null, _react.default.createElement("p", {
+        className: "question"
+      }, "Dont't have an account yet?"), _react.default.createElement("button", {
+        className: "button oauthbuttonText lightGray",
         onClick: function onClick() {
           return _this2.setState({
-            authFormAction: 'Sign Up'
+            authFormAction: 'Register'
           });
         }
       }, "Registration"))))))))));
@@ -42083,7 +42102,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50154" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54387" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

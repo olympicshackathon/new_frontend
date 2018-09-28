@@ -12,7 +12,7 @@ import { classToggler, logError, renderIf } from '../../lib/util.js';
 class Navbar extends React.Component {
   constructor(props){
     super(props);
-    this.state={ showDropDown: false, authFormAction: 'Sign Up' };
+    this.state={ showDropDown: false, authFormAction: 'Register' };
   }
   componentDidMount() {
     return this.props.currentLocationFetch();
@@ -52,7 +52,7 @@ class Navbar extends React.Component {
   };
   render() {
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
-    let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
+    let handleComplete = this.state.authFormAction === 'Register' ? this.handleSignup : this.handleSignin;
     return (
         <header>
           <nav>
@@ -105,34 +105,46 @@ class Navbar extends React.Component {
                 </ul>
               </div>
             )}
-            {renderIf(!this.props.userAuth,
-              <div>
+            {renderIf(!this.props.userAunth,
+            <div className='ddContainer'>
               <div id='signInBanner'>
-                <p>Sign in</p>
+                {renderIf(this.state.authFormAction =='Sign In',
+                  <p>Sign in</p>
+                )}
+                {renderIf(this.state.authFormAction =='Register',
+                  <p>Register</p>
+                )}
               </div>
               <div className='oauthDiv'>
                 <div className='oauthButtonContainer'>
-                  <button className='oauthButton'><span><img src='https://i.imgur.com/8SuZVDb.png' /></span> <span className='oauthbuttonText'>Sign in with Facebook</span></button>
+                  <button className='button randomBlue'><img src='https://i.imgur.com/8SuZVDb.png' /><span className='oauthbuttonText'>Sign in with Facebook</span></button>
                 </div>
                 <div className='oauthButtonContainer'>
-                  <button className='oauthButton'><span><img src='https://i.imgur.com/1oNQY1E.png' /></span> <span className='oauthbuttonText'>Sign in with Google</span></button>
+                  <button className='button randomGray'><img src='https://i.imgur.com/1oNQY1E.png' /> <span className='oauthbuttonText'>Sign in with Google</span></button>
                 </div>
               </div>
               <div className='orLine'>
-                <p>OR</p>
+                <p className='or'>OR</p>
                 <p className='underline'> </p>
               </div>
               <div className='navForm-div'>
                 <div>
                   <UserAuthForm authFormAction={this.state.authFormAction} onComplete={handleComplete} />
                     <div className='userauth-buttons'>
-                      {renderIf(this.state.authFormAction==='Sign Up',
-                        <button className='grayButton' onClick={() => this.setState({authFormAction: 'Sign In'})}>Sign In</button>
+                      {renderIf(this.state.authFormAction==='Register',
+                        <div>
+                          <p className='question'>
+                            Already have an account?
+                          </p>
+                        <button className='button oauthbuttonText lightGray' onClick={() => this.setState({authFormAction: 'Sign In'})}>Sign In</button>
+                        </div>
                       )}
                       {renderIf(this.state.authFormAction==='Sign In',
                         <div>
-                          <p className='accountMessage'>Don't have an account yet?</p>
-                          <button className='grayButton' onClick={() => this.setState({authFormAction: 'Sign Up'})}>Registration</button>
+                          <p className='question'>
+                            Dont't have an account yet?
+                          </p>
+                          <button className='button oauthbuttonText lightGray' onClick={() => this.setState({authFormAction: 'Register'})}>Registration</button>
                         </div>
                       )}
                     </div>

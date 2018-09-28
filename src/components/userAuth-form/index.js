@@ -82,7 +82,7 @@ class UserAuthForm extends React.Component {
       [name]: value,
     });
 
-    if(this.props.authFormAction === 'Sign Up' && name === 'username') {
+    if(this.props.authFormAction === 'Register' && name === 'username') {
       this.usernameCheckAvailable(value);
     }
   };
@@ -127,59 +127,66 @@ class UserAuthForm extends React.Component {
         'form userauth-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
-        {renderIf(this.props.authFormAction === 'Sign Up',
+        {renderIf(this.props.authFormAction === 'Register',
           <div>
-            <h2 className='title'>SIGN UP</h2>
-            <input
-              className={classToggler({error: emailError})}
-              type='text'
-              name='email'
-              placeholder='Email Address'
-              value={this.state.email}
-              onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-            />
+            <h2 className='title'>Register</h2>
+            <div className='iconInputDiv'>
+              <input
+                className={classToggler({error: emailError})}
+                type='text'
+                name='email'
+                placeholder='Email Address'
+                value={this.state.email}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+              />
+              <img className='envelopeIcon' src='https://i.imgur.com/oXi4RWq.png' />
+            </div>
             <Tooltip message={emailError} show={focused === 'email' || submitted} />
           </div>
         )}
-        {renderIf(this.props.authFormAction !== 'Sign Up',
+        {renderIf(this.props.authFormAction !== 'Register',
           <div>
-            <h2 className='title'>SIGN IN</h2>
+            <h2 className='title'>Sign In</h2>
           </div>
         )}
-        <input
-          className={classToggler({error: usernameError || !usernameAvailable})}
-          type='text'
-          name='username'
-          placeholder='Username'
-          value={this.state.username}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        />
+        <div className='iconInputDiv'>
+          <input
+            className={classToggler({error: usernameError || !usernameAvailable})}
+            type='text'
+            name='username'
+            placeholder='Username'
+            value={this.state.username}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          />
+          <img className='envelopeIcon' src='https://i.imgur.com/UCainXV.png' />
+        </div>
         <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
-        {renderIf(username && this.props.authFormAction=== 'Sign Up',
+        {renderIf(username && this.props.authFormAction=== 'Register',
           <div className='username-availability-outer'>
             <p className='username-availability'>
               {username} {usernameAvailable ? 'is available.': 'is not available.'}
             </p>
           </div>
         )}
-        <input
-          className={classToggler({passwordError})}
-          type='password'
-          name='password'
-          placeholder='Password (case sensitive)'
-          value={this.state.password}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        />
-        <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
-        <div className='buttonAuthFormParentDiv'>
-          <button className='formButton' type='submit'> {this.props.authFormAction} </button>
+        <div className='iconInputDiv'>
+          <input
+            className={classToggler({passwordError})}
+            type='password'
+            name='password'
+            placeholder='Password (case sensitive)'
+            value={this.state.password}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+          />
+          <img className='lockIcon'src='https://i.imgur.com/LpyEKUz.png' />
         </div>
+        <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
+        <button className='button lightBlue oauthbuttonText' type='submit'> {this.props.authFormAction} </button>
       </form>
     );
   }

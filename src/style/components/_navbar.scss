@@ -162,6 +162,27 @@ header {
   right: 0;
   height: 50px;
 }
+.ddContainer {
+  min-height: calc((100vh - 50px));
+}
+.question {
+  margin: 0 0 10px 2.5vw;
+  font-size: 13px;
+
+  font-weight: 500;
+  color: rgba(139, 139, 139, 0.5);
+}
+#signInBanner {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+  text-align: center;
+  padding: 5px 0;
+  margin-bottom: 10px;
+
+  p {
+    font-weight: 500;
+    color: #646462;
+  }
+}
 // nav form
 .navForm-div {
   margin: 40px auto;
@@ -169,23 +190,28 @@ header {
   .userauth-form {
     font-size: 17px;
     line-height: 1.59;
-    color: #3c3c3c;
-    width: calc((100vw - 65px));
+    color: #8b8b8b;
+    width: 95vw;
     margin: auto;
 
     h2.title {
       margin-bottom: 15px;
       font-size: 17px;
-      color: #111;
+      color: #8b8b8b;
       line-height: 1.2;
       font-weight: 600;
       margin: 0 0 15px !important;
+      position: absolute;
+      top: 0;
+    }
+    .button {
+      margin: 10px 0;
     }
     input {
       font-size: 13px;
       background-color: transparent !important;
       border: 1px solid #dfe4e4;
-      border-radius: 2px;
+      border-radius: 8px;
       box-shadow: none;
       display: block;
       box-sizing: border-box;
@@ -193,25 +219,51 @@ header {
       height: 39px;
       padding: 8px;
       margin: 0 0 24px;
-      color: #000;
+      color: #8b8b8b;
       transition: box-shadow .5s,border-color .25s ease-in-out;
       -webkit-appearance: none;
       appearance: none;
+      padding-left: 44px;
     }
     input:active, input:focus {
-      border: 1px solid #111;
-      box-shadow: 0 0 5px #afafaf;
+      border: 1px solid gba(139, 139, 139, 0.2);
+      box-shadow: 0 1px 4px 0 rgba(139, 139, 139, 0.2);
       -webkit-box-shadow: 0 0 5px #afafaf;
       transition: box-shadow .5s,border-color .25s ease-in-out;
     }
   }
-
-  button {
-    float: right;
-    margin-left: 20px;
-  }
 }
-
+.oauthDiv img {
+  margin: 0 13.5px;
+  width: 21px;
+  position: absolute;
+  left: 0;
+}
+.orLine {
+  position: relative;
+  text-align: center;
+  height: 10px;
+  margin-top: 30px;
+}
+.or {
+  padding: 0 10px;
+  background: #fff;
+  position: absolute;
+  z-index: 99;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: rgba(139, 139, 139, .5);
+  font-size: 12px;
+  font-weight: 700;
+  transform: translate(-50%, -50%);
+}
+.underline {
+  position: absolute;
+  bottom: 50%;
+  width: 100vw;
+  border-bottom: 1px solid rgba(139, 139, 139, .2);
+}
 // hacky but removes chrome's yellow autofill input background
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -224,18 +276,17 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
    -webkit-box-shadow: 0 0 0px 1000px white inset!important;
+   color: #8b8b8b !important;
 }
 
 input:active, input:focus {
-  border: 1px solid #111;
+  border: 1px solid color rgba(139, 139, 139, 0.2);
   box-shadow: 0 0 5px #afafaf;
   -webkit-box-shadow: 0 0 5px #afafaf;
   transition: box-shadow .5s,border-color .25s ease-in-out;
 }
-
-@media (min-width: 465px) {
-  .navForm-div .userauth-form {
-    width: 40vw;
-    min-width: 400px;
-  }
+.username-availability {
+  padding-left: 10px;
+  color: #8b8b8b;
+  font-size: 13px;
 }
