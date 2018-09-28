@@ -11,8 +11,7 @@
     "watch": "parcel src/index.html",
     "test": "jest",
     "test-watch": "jest --watchAll",
-    "start": "node server.js",
-    "heroku-postbuild": "yarn build"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
