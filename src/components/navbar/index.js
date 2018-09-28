@@ -111,7 +111,7 @@ class Navbar extends React.Component {
             )}
             {renderIf(!this.props.userAuth,
             <div className='ddContainer'>
-              <div id='signInBanner'>
+              <div className='signInBanner'>
                 {renderIf(this.state.authFormAction =='Sign In',
                   <p>Sign in</p>
                 )}

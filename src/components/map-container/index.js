@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import ReactDOM from 'react-dom';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import PropTypes from 'prop-types';
-import superagent from 'superagent';
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
@@ -39,8 +36,8 @@ class MapContainer extends React.Component {
     onMapReady = (mapProps, map) => {
         this.setState({ currentLocation: this.props.currentLocation });
         this.searchNearby(map, map.center);
-
         this.map = map;
+
         window.onresize = () => {
             const currCenter = map.getCenter();
             this.props.google.maps.event.trigger(map, 'resize');
@@ -62,7 +59,6 @@ class MapContainer extends React.Component {
     };
 
     searchNearbyCallback = (results, status, pagination) => {
-        console.log('results: ', results);
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length && i < 10; i++) {
 
@@ -74,8 +70,9 @@ class MapContainer extends React.Component {
                     address: results[i].vicinity,
                     name: results[i].name,
                     type: results[i].types[0],
-                    photos: results[i].photos[0].getUrl({'maxWidth': 600, 'maxHeight': 400}),
                 };
+                if (results[i].photos)
+                    place.photos = results[i].photos[0].getUrl({'maxWidth': 600, 'maxHeight': 400});
                 while (!place.photos && results[i].photos)
                     results[i].photos.forEach(pho => place.photos.push(pho.getUrl({'maxWidth': 600, 'maxHeight': 400})));
                 this.setState({ places: [...this.state.places, place ] });
@@ -85,28 +82,10 @@ class MapContainer extends React.Component {
             //     pagination.nextPage();
             // }
         }
-        console.log('places: ', this.state.places);
     };
 
     createMarker = (item, i) => {
         const { google } = this.props;
-
-        // var contentString = 
-        // '<div id="content" class="infowindow">' +
-        //     '<div id="siteNotice">' + '</div>' +
-        //     '<div class="iwpic">' +
-        //         '<img src="' + item.photos[0] + '"/>' +
-        //     '</div>' +
-        //     '<div class="iwcontent">' +
-        //         '<p class="iwname">' + item.name + '<span class="iwtype">' + item.type + '</span> </p>' +
-        //         '<p class="iwaddress">' + '<img src="https://i.imgur.com/icxBvfa.png" class="iwballoon"/>' + item.address +  '</p>' +
-        //     '</div>' +
-        // '</div>';
-    
-        // var infowindow = new google.maps.InfoWindow({
-        //     content: contentString
-        // });
-
         var marker = new google.maps.Marker({
             map: this.state.map,
             position: item.location,
@@ -119,11 +98,12 @@ class MapContainer extends React.Component {
         });
 
         marker.addListener('click', () => this.showiw(i));
-    }
+    };
+
     showiw = arrpos => {
         this.setState({showiw: true, current: this.state.places[arrpos] });
         console.log('current: ', this.state.current);
-    }
+    };
 
     onMapClicked = props => {
         if (this.state.showingInfoWindow) {

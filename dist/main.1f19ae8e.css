@@ -1012,12 +1012,12 @@ header {
   font-weight: 500;
   color: rgba(139, 139, 139, 0.5); }
 
-#signInBanner {
+.signInBanner {
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
   text-align: center;
   padding: 5px 0;
   margin-bottom: 10px; }
-  #signInBanner p {
+  .signInBanner p {
     font-weight: 500;
     color: #646462; }
 
@@ -1437,6 +1437,66 @@ input:active, input:focus {
     position: absolute;
     top: 8px;
     left: 10px; }
+
+.dbhead {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+  text-align: center;
+  margin-bottom: 10px;
+  height: 50px;
+  position: absolute;
+  z-index: 999; }
+  .dbhead p {
+    width: 50vw;
+    display: inline-block;
+    height: 100%;
+    font-weight: 500;
+    color: #646462;
+    line-height: 1;
+    font-size: 20px;
+    padding: 15px;
+    cursor: pointer; }
+  .dbhead .active {
+    border-bottom: 4px solid #153F90;
+    font-weight: 600; }
+
+.dbContainer {
+  position: relative;
+  min-height: calc((100vh - 50px)); }
+  .dbContainer .dbFooter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    background-color: #153F90; }
+    .dbContainer .dbFooter .gain {
+      text-align: center;
+      margin-top: 55px;
+      color: #fff;
+      font-size: 14px; }
+    .dbContainer .dbFooter .footerBottomRow {
+      text-align: center;
+      color: #FFF;
+      font-size: 40px;
+      font-weight: 600;
+      margin-top: 15px; }
+      .dbContainer .dbFooter .footerBottomRow span {
+        width: 65px !important;
+        padding-right: 59px;
+        height: 45px;
+        color: #153F90; }
+        .dbContainer .dbFooter .footerBottomRow span img {
+          height: 55px;
+          position: absolute;
+          margin-top: -10px; }
+
+.dbCharts {
+  padding-top: 50px;
+  text-align: center;
+  z-index: 55;
+  position: relative; }
+  .dbCharts img {
+    max-width: 100vw; }
 
 #map {
   width: 100vw;

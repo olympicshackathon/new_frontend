@@ -35165,7 +35165,7 @@ function (_React$Component) {
       }, _react.default.createElement("span", null, "LOG OUT")))), (0, _util.renderIf)(!this.props.userAuth, _react.default.createElement("div", {
         className: "ddContainer"
       }, _react.default.createElement("div", {
-        id: "signInBanner"
+        className: "signInBanner"
       }, (0, _util.renderIf)(this.state.authFormAction == 'Sign In', _react.default.createElement("p", null, "Sign in")), (0, _util.renderIf)(this.state.authFormAction == 'Register', _react.default.createElement("p", null, "Register"))), _react.default.createElement("div", {
         className: "oauthDiv"
       }, _react.default.createElement("div", {
@@ -41159,13 +41159,7 @@ var _reactRedux = require("react-redux");
 
 var _reactRouter = require("react-router");
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
 var _googleMapsReact = require("google-maps-react");
-
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _superagent = _interopRequireDefault(require("superagent"));
 
 var _userAuthActions = require("../../actions/userAuth-actions.js");
 
@@ -41336,8 +41330,6 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.searchNearbyCallback = function (results, status, pagination) {
-    console.log('results: ', results);
-
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       var _loop = function _loop() {
         var place = {
@@ -41347,12 +41339,12 @@ var _initialiseProps = function _initialiseProps() {
           },
           address: results[i].vicinity,
           name: results[i].name,
-          type: results[i].types[0],
-          photos: results[i].photos[0].getUrl({
-            'maxWidth': 600,
-            'maxHeight': 400
-          })
+          type: results[i].types[0]
         };
+        if (results[i].photos) place.photos = results[i].photos[0].getUrl({
+          'maxWidth': 600,
+          'maxHeight': 400
+        });
 
         while (!place.photos && results[i].photos) {
           results[i].photos.forEach(function (pho) {
@@ -41377,26 +41369,10 @@ var _initialiseProps = function _initialiseProps() {
       // }
 
     }
-
-    console.log('places: ', _this2.state.places);
   };
 
   this.createMarker = function (item, i) {
-    var google = _this2.props.google; // var contentString = 
-    // '<div id="content" class="infowindow">' +
-    //     '<div id="siteNotice">' + '</div>' +
-    //     '<div class="iwpic">' +
-    //         '<img src="' + item.photos[0] + '"/>' +
-    //     '</div>' +
-    //     '<div class="iwcontent">' +
-    //         '<p class="iwname">' + item.name + '<span class="iwtype">' + item.type + '</span> </p>' +
-    //         '<p class="iwaddress">' + '<img src="https://i.imgur.com/icxBvfa.png" class="iwballoon"/>' + item.address +  '</p>' +
-    //     '</div>' +
-    // '</div>';
-    // var infowindow = new google.maps.InfoWindow({
-    //     content: contentString
-    // });
-
+    var google = _this2.props.google;
     var marker = new google.maps.Marker({
       map: _this2.state.map,
       position: item.location,
@@ -41531,7 +41507,7 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Wra
 
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","react-dom":"../node_modules/react-dom/index.js","google-maps-react":"../node_modules/google-maps-react/dist/index.js","prop-types":"../node_modules/prop-types/index.js","superagent":"../node_modules/superagent/lib/client.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../helpers/modal":"components/helpers/modal/index.js","./../../lib/util.js":"lib/util.js"}],"components/landing-container/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","google-maps-react":"../node_modules/google-maps-react/dist/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../helpers/modal":"components/helpers/modal/index.js","./../../lib/util.js":"lib/util.js"}],"components/landing-container/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41736,7 +41712,147 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyWallet);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","./../../lib/util.js":"lib/util.js"}],"components/app/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","./../../lib/util.js":"lib/util.js"}],"components/dashboard/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _reactRouter = require("react-router");
+
+var _userAuthActions = require("../../actions/userAuth-actions.js");
+
+var _userProfileActions = require("../../actions/userProfile-actions.js");
+
+var _mapActions = require("../../actions/map-actions.js");
+
+var _util = require("./../../lib/util.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var Dashboard =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Dashboard, _React$Component);
+
+  function Dashboard(props) {
+    var _this;
+
+    _classCallCheck(this, Dashboard);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Dashboard).call(this, props));
+    _this.state = {
+      active: 'today'
+    };
+    return _this;
+  }
+
+  _createClass(Dashboard, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      (0, _util.userValidation)(this.props);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return _react.default.createElement("section", {
+        className: "landingContainer container-outer dbContainer"
+      }, _react.default.createElement("div", {
+        className: "dbhead"
+      }, _react.default.createElement("p", {
+        onClick: function onClick() {
+          return _this2.setState({
+            active: 'today'
+          });
+        },
+        className: (0, _util.classToggler)({
+          'today': true,
+          'active': this.state.active == 'today'
+        })
+      }, "Today"), _react.default.createElement("p", {
+        onClick: function onClick() {
+          return _this2.setState({
+            active: 'total'
+          });
+        },
+        className: (0, _util.classToggler)({
+          'total': true,
+          'active': this.state.active == 'total'
+        })
+      }, "Total")), _react.default.createElement("div", {
+        className: "dbCharts"
+      }, _react.default.createElement("img", {
+        src: "https://i.imgur.com/EJcdtgi.png"
+      })), _react.default.createElement("div", {
+        className: "dbFooter"
+      }, _react.default.createElement("p", {
+        className: "gain"
+      }, "Total Gain"), _react.default.createElement("p", {
+        className: "footerBottomRow"
+      }, "10.63 ", _react.default.createElement("span", null, " . ", _react.default.createElement("img", {
+        src: "https://i.imgur.com/VGksbdY.png"
+      })), " ")));
+    }
+  }]);
+
+  return Dashboard;
+}(_react.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    userAuth: state.userAuth,
+    userProfile: state.userProfile,
+    currentLocation: state.currentLocation
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    tokenSignIn: function tokenSignIn(token) {
+      return dispatch((0, _userAuthActions.tokenSignInRequest)(token));
+    },
+    userProfileFetch: function userProfileFetch() {
+      return dispatch((0, _userProfileActions.userProfileFetchRequest)());
+    },
+    userProfileUpdate: function userProfileUpdate(profile) {
+      return dispatch((0, _userProfileActions.userProfileUpdateRequest)(profile));
+    },
+    currentLocationFetch: function currentLocationFetch() {
+      return dispatch((0, _mapActions.currentLocationFetchRequest)());
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","./../../lib/util.js":"lib/util.js"}],"components/app/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41755,6 +41871,8 @@ var _navbar = _interopRequireDefault(require("../navbar"));
 var _landingContainer = _interopRequireDefault(require("../landing-container"));
 
 var _mywallet = _interopRequireDefault(require("../mywallet"));
+
+var _dashboard = _interopRequireDefault(require("../dashboard"));
 
 var _mapContainer = _interopRequireDefault(require("../map-container"));
 
@@ -41811,6 +41929,10 @@ function (_React$Component) {
         exact: true,
         path: "/mywallet",
         component: _mywallet.default
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/dashboard",
+        component: _dashboard.default
       })));
     }
   }]);
@@ -41842,7 +41964,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../navbar":"components/navbar/index.js","../landing-container":"components/landing-container/index.js","../mywallet":"components/mywallet/index.js","../map-container":"components/map-container/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js"}],"reducers/userAuth-reducers.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../navbar":"components/navbar/index.js","../landing-container":"components/landing-container/index.js","../mywallet":"components/mywallet/index.js","../dashboard":"components/dashboard/index.js","../map-container":"components/map-container/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js"}],"reducers/userAuth-reducers.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42141,7 +42263,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56715" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61043" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
