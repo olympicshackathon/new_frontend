@@ -853,10 +853,10 @@ header {
 .navPrimary {
   width: auto;
   position: relative;
-  height: 70px;
-  background-color: #fff;
+  height: 50px;
+  background-color: #008FD7;
   overflow: hidden;
-  padding: 17px 0 0 19px;
+  padding: 7.5px 0 0 19px;
   z-index: 1000; }
 
 .navPrimary-toggle {
@@ -867,7 +867,6 @@ header {
   float: left;
   margin-right: 14px;
   display: block;
-  background-color: #fff;
   cursor: pointer; }
 
 .navPrimary-toggle span:nth-child(1) {
@@ -901,12 +900,18 @@ header {
   position: absolute;
   width: 20px;
   height: 3px;
-  background: #111;
+  background: #FFF;
   left: 0;
   opacity: 1;
   -webkit-transform: rotate(0);
   transform: rotate(0);
   transition: .2s ease-in-out; }
+
+.navcoinlogo {
+  height: 30px; }
+
+.extrapadding {
+  margin: 10px; }
 
 .navPrimary-logo {
   display: block;
@@ -936,7 +941,8 @@ header {
 
 .navPrimary-dropdown {
   min-height: 100vh;
-  width: 100vw;
+  width: 85vw;
+  padding: 7.5px 0 0 19px;
   background-color: #fff;
   position: absolute;
   top: 0;
@@ -970,7 +976,7 @@ header {
 .navPrimary-li-text {
   display: block;
   text-decoration: none;
-  color: #111;
+  color: #008FD7;
   font-size: 22px;
   line-height: 1;
   padding: 10px 25px;
@@ -982,6 +988,16 @@ header {
 
 .navPrimary-li-text:hover {
   color: #3c3c3c; }
+
+.buttonAuthFormParentDiv {
+  text-align: center; }
+
+.darkNavSection {
+  background-color: #153F90;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px; }
 
 .navForm-div {
   margin: 40px auto; }
@@ -1221,39 +1237,20 @@ input:active, input:focus {
   text-align: center;
   text-transform: uppercase; }
 
-.formButton:hover {
-  -webkit-animation: buttoncolor .9s 1;
-  animation: buttoncolor 1.25s 1;
-  color: #FFF;
-  background-color: #df0024; }
-
 .darkButton {
   background-color: #4d4d4d;
   color: #FFF; }
 
-@-webkit-keyframes buttoncolor {
-  0% {
-    background-color: #0085c7; }
-  25% {
-    background-color: #f4c300; }
-  50% {
-    background-color: #000000; }
-  75% {
-    background-color: #0da447; }
-  100% {
-    background-color: #df0024; } }
-
-@keyframes buttoncolor {
-  0% {
-    background-color: #0085c7; }
-  25% {
-    background-color: #f4c300; }
-  50% {
-    background-color: #000000; }
-  75% {
-    background-color: #0da447; }
-  100% {
-    background-color: #df0024; } }
+.whitebutton {
+  border-color: #008FD7;
+  color: #008FD7;
+  background: #fff;
+  border-color: #008FD7;
+  width: 90%;
+  margin: 0;
+  float: none;
+  color: #008FD7;
+  background: #fff; }
 
 @media (max-width: 464px) {
   .formButton {

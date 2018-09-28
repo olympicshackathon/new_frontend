@@ -28981,29 +28981,7 @@ var _matchPath2 = _interopRequireDefault(require("./matchPath"));
 var _withRouter2 = _interopRequireDefault(require("./withRouter"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./BrowserRouter":"../node_modules/react-router-dom/es/BrowserRouter.js","./HashRouter":"../node_modules/react-router-dom/es/HashRouter.js","./Link":"../node_modules/react-router-dom/es/Link.js","./MemoryRouter":"../node_modules/react-router-dom/es/MemoryRouter.js","./NavLink":"../node_modules/react-router-dom/es/NavLink.js","./Prompt":"../node_modules/react-router-dom/es/Prompt.js","./Redirect":"../node_modules/react-router-dom/es/Redirect.js","./Route":"../node_modules/react-router-dom/es/Route.js","./Router":"../node_modules/react-router-dom/es/Router.js","./StaticRouter":"../node_modules/react-router-dom/es/StaticRouter.js","./Switch":"../node_modules/react-router-dom/es/Switch.js","./generatePath":"../node_modules/react-router-dom/es/generatePath.js","./matchPath":"../node_modules/react-router-dom/es/matchPath.js","./withRouter":"../node_modules/react-router-dom/es/withRouter.js"}],"components/helpers/avatar/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Avatar = function Avatar(props) {
-  return _react.default.createElement("div", {
-    className: "avatar"
-  }, _react.default.createElement("img", {
-    src: props.url
-  }));
-};
-
-var _default = Avatar;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../node_modules/component-emitter/index.js":[function(require,module,exports) {
+},{"./BrowserRouter":"../node_modules/react-router-dom/es/BrowserRouter.js","./HashRouter":"../node_modules/react-router-dom/es/HashRouter.js","./Link":"../node_modules/react-router-dom/es/Link.js","./MemoryRouter":"../node_modules/react-router-dom/es/MemoryRouter.js","./NavLink":"../node_modules/react-router-dom/es/NavLink.js","./Prompt":"../node_modules/react-router-dom/es/Prompt.js","./Redirect":"../node_modules/react-router-dom/es/Redirect.js","./Route":"../node_modules/react-router-dom/es/Route.js","./Router":"../node_modules/react-router-dom/es/Router.js","./StaticRouter":"../node_modules/react-router-dom/es/StaticRouter.js","./Switch":"../node_modules/react-router-dom/es/Switch.js","./generatePath":"../node_modules/react-router-dom/es/generatePath.js","./matchPath":"../node_modules/react-router-dom/es/matchPath.js","./withRouter":"../node_modules/react-router-dom/es/withRouter.js"}],"../node_modules/component-emitter/index.js":[function(require,module,exports) {
 
 /**
  * Expose `Emitter`.
@@ -34977,8 +34955,6 @@ var _reactRedux = require("react-redux");
 
 var _reactRouterDom = require("react-router-dom");
 
-var _avatar = _interopRequireDefault(require("../helpers/avatar"));
-
 var _userAuthActions = require("../../actions/userAuth-actions.js");
 
 var _userProfileActions = require("../../actions/userProfile-actions.js");
@@ -35092,13 +35068,19 @@ function (_React$Component) {
           'navPrimary-toggle': true,
           'ddOpen': this.state.showDropDown
         })
-      }, _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null)), _react.default.createElement("p", {
-        className: "navPrimary-logo"
-      }, _react.default.createElement("span", {
-        className: "logo1"
-      }, "OLYMPIC "), _react.default.createElement("span", {
-        className: "logo2"
-      }, "APP"))), (0, _util.renderIf)(this.state.showDropDown, _react.default.createElement("div", {
+      }, _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null), _react.default.createElement("span", null)), _react.default.createElement("div", {
+        className: "darkNavSection"
+      }, (0, _util.renderIf)(this.props.userAuth && this.state.showDropDown, _react.default.createElement("div", {
+        className: "coins"
+      }, _react.default.createElement("p", null, " 10.63 "))), _react.default.createElement("img", {
+        className: (0, _util.classToggler)({
+          'navcoinlogo': true,
+          'extrapadding': !this.props.userAuth
+        }),
+        src: "https://i.imgur.com/ey72AKX.png"
+      }), (0, _util.renderIf)(this.props.userAuth && this.state.showDropDown, _react.default.createElement("div", {
+        className: "distance"
+      }, _react.default.createElement("p", null, "7,3 km"))))), (0, _util.renderIf)(this.props.userAuth && this.state.showDropDown, _react.default.createElement("div", {
         className: "navPrimary-dropdown"
       }, _react.default.createElement("div", {
         className: "navShadow"
@@ -35107,80 +35089,108 @@ function (_React$Component) {
       }, _react.default.createElement("li", {
         className: "navPrimary-li"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/",
+        to: "/dashboard",
         className: "navPrimary-li-text",
         onClick: function onClick() {
           return _this2.setState({
             showDropDown: false
           });
         }
-      }, "HOME")), _react.default.createElement("li", {
+      }, _react.default.createElement("img", {
+        src: "https://i.imgur.com/OPUUc13.png",
+        className: "navIcons dbicon"
+      }), " DASHBOARD")), _react.default.createElement("li", {
         className: "navPrimary-li"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/",
+        to: "/map",
         className: "navPrimary-li-text",
         onClick: function onClick() {
           return _this2.setState({
             showDropDown: false
           });
         }
-      }, "GET INVOLVED")), _react.default.createElement("li", {
+      }, _react.default.createElement("img", {
+        src: "https://i.imgur.com/gxfbqpg.png",
+        className: "navIcons mapicon"
+      }), " MAP")), _react.default.createElement("li", {
         className: "navPrimary-li"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/",
+        to: "/dailychallenge",
         className: "navPrimary-li-text",
         onClick: function onClick() {
           return _this2.setState({
             showDropDown: false
           });
         }
-      }, "OUR MISSION")), (0, _util.renderIf)(this.props.userAuth, _react.default.createElement("div", null, _react.default.createElement("li", {
+      }, _react.default.createElement("img", {
+        src: "https://i.imgur.com/KgDT2nR.png",
+        className: "navIcons dcicon"
+      }), " DAILY CHALLENGE")), _react.default.createElement("li", {
         className: "navPrimary-li"
       }, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/play",
+        to: "/mywallet",
         className: "navPrimary-li-text",
         onClick: function onClick() {
           return _this2.setState({
             showDropDown: false
           });
         }
-      }, "PLAY")), _react.default.createElement("li", {
-        className: "navPrimary-li"
-      }, _react.default.createElement(_reactRouterDom.Link, {
-        to: profileLink,
-        className: "navPrimary-li-text",
-        onClick: function onClick() {
-          return _this2.setState({
-            showDropDown: false
-          });
-        }
-      }, "PROFILE")), _react.default.createElement("li", {
+      }, _react.default.createElement("img", {
+        src: "https://i.imgur.com/Bnd3w7M.png",
+        className: "navIcons walleticon"
+      }), " MY WALLET")), _react.default.createElement("li", {
         className: "navPrimary-li"
       }, _react.default.createElement("p", {
         className: "navPrimary-li-text",
         onClick: this.handleSignOut
-      }, "LOGOUT")))), (0, _util.renderIf)(!this.props.userAuth, _react.default.createElement("div", {
+      }, "LOGOUT"))))), (0, _util.renderIf)(!this.props.userAuth, _react.default.createElement("div", null, _react.default.createElement("div", {
+        id: "signInBanner"
+      }, _react.default.createElement("p", null, "Sign in")), _react.default.createElement("div", {
+        className: "oauthDiv"
+      }, _react.default.createElement("div", {
+        className: "oauthButtonContainer"
+      }, _react.default.createElement("button", {
+        className: "oauthButton"
+      }, _react.default.createElement("span", null, _react.default.createElement("img", {
+        src: "https://i.imgur.com/8SuZVDb.png"
+      })), " ", _react.default.createElement("span", {
+        className: "oauthbuttonText"
+      }, "Sign in with Facebook"))), _react.default.createElement("div", {
+        className: "oauthButtonContainer"
+      }, _react.default.createElement("button", {
+        className: "oauthButton"
+      }, _react.default.createElement("span", null, _react.default.createElement("img", {
+        src: "https://i.imgur.com/1oNQY1E.png"
+      })), " ", _react.default.createElement("span", {
+        className: "oauthbuttonText"
+      }, "Sign in with Google")))), _react.default.createElement("div", {
+        className: "orLine"
+      }, _react.default.createElement("p", null, "OR"), _react.default.createElement("p", {
+        className: "underline"
+      }, " ")), _react.default.createElement("div", {
         className: "navForm-div"
-      }, _react.default.createElement(_userAuthForm.default, {
+      }, _react.default.createElement("div", null, _react.default.createElement(_userAuthForm.default, {
         authFormAction: this.state.authFormAction,
         onComplete: handleComplete
       }), _react.default.createElement("div", {
         className: "userauth-buttons"
-      }, (0, _util.renderIf)(this.state.authFormAction === 'Sign In', _react.default.createElement("button", {
-        className: "formButton darkButton",
-        onClick: function onClick() {
-          return _this2.setState({
-            authFormAction: 'Sign Up'
-          });
-        }
-      }, "Sign Up")), (0, _util.renderIf)(this.state.authFormAction === 'Sign Up', _react.default.createElement("button", {
-        className: "formButton darkButton",
+      }, (0, _util.renderIf)(this.state.authFormAction === 'Sign Up', _react.default.createElement("button", {
+        className: "grayButton",
         onClick: function onClick() {
           return _this2.setState({
             authFormAction: 'Sign In'
           });
         }
-      }, "Sign In"))))))))));
+      }, "Sign In")), (0, _util.renderIf)(this.state.authFormAction === 'Sign In', _react.default.createElement("div", null, _react.default.createElement("p", {
+        className: "accountMessage"
+      }, "Don't have an account yet?"), _react.default.createElement("button", {
+        className: "grayButton",
+        onClick: function onClick() {
+          return _this2.setState({
+            authFormAction: 'Sign Up'
+          });
+        }
+      }, "Registration"))))))))));
     }
   }]);
 
@@ -35218,7 +35228,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Navbar);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../helpers/avatar":"components/helpers/avatar/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../userAuth-form":"components/userAuth-form/index.js","../../lib/util.js":"lib/util.js"}],"../node_modules/react-router/es/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../userAuth-form":"components/userAuth-form/index.js","../../lib/util.js":"lib/util.js"}],"../node_modules/react-router/es/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41581,7 +41591,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LandingContainer);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../intro":"components/intro/index.js","../userProfile-form":"components/userProfile-form/index.js","../map-container":"components/map-container/index.js","./../../lib/util.js":"lib/util.js"}],"components/profile-container/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../intro":"components/intro/index.js","../userProfile-form":"components/userProfile-form/index.js","../map-container":"components/map-container/index.js","./../../lib/util.js":"lib/util.js"}],"components/mywallet/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41593,11 +41603,7 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRedux = require("react-redux");
 
-var _userProfileForm = _interopRequireDefault(require("../userProfile-form"));
-
-var _userAuthActions = require("../../actions/userAuth-actions.js");
-
-var _userProfileActions = require("../../actions/userProfile-actions.js");
+var _reactRouterDom = require("react-router-dom");
 
 var _util = require("./../../lib/util.js");
 
@@ -41621,77 +41627,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var ProfileContainer =
+var MyWallet =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(ProfileContainer, _React$Component);
+  _inherits(MyWallet, _React$Component);
 
-  function ProfileContainer(props) {
+  function MyWallet(props) {
     var _this;
 
-    _classCallCheck(this, ProfileContainer);
+    _classCallCheck(this, MyWallet);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileContainer).call(this, props));
-
-    _this.handleProfileUpdate = function (profile) {
-      return _this.props.userProfileUpdate(profile)["catch"](_util.logError);
-    };
-
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MyWallet).call(this, props));
+    _this.state = {};
     return _this;
   }
 
-  _createClass(ProfileContainer, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      (0, _util.userValidation)(this.props);
-    }
-  }, {
+  _createClass(MyWallet, [{
     key: "render",
     value: function render() {
-      var profileAction = 'update'; // let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
-      // let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
-
       return _react.default.createElement("div", {
-        className: "profile-container page-outer-div"
-      }, _react.default.createElement("div", {
-        className: "grid-container"
-      }, _react.default.createElement("div", null, _react.default.createElement("div", {
-        className: "row"
-      }, _react.default.createElement("div", {
-        className: "col-md-8"
-      }, _react.default.createElement("div", {
-        className: "createOuter"
-      }, _react.default.createElement("div", {
-        className: "page-form"
-      }, _react.default.createElement(_userProfileForm.default, {
-        userProfile: this.props.userProfile,
-        onComplete: this.handleProfileUpdate,
-        profileAction: profileAction
-      })))), _react.default.createElement("div", {
-        className: "col-md-4 hideMedium"
-      }, _react.default.createElement("div", {
-        className: "mainContainer"
-      }, _react.default.createElement("div", {
-        className: "mainContainer-header"
-      }, _react.default.createElement("div", {
-        className: "left"
-      }, _react.default.createElement("p", {
-        className: "mainContainerHeader"
-      }, this.props.userProfile.username))), _react.default.createElement("div", {
-        className: "mainContainerSection"
-      }, _react.default.createElement("div", {
-        className: "mainContainerSectionWrapper"
-      }, _react.default.createElement("div", {
-        className: "container"
-      }, _react.default.createElement("div", {
-        className: "inner-wrapper"
-      }, _react.default.createElement("div", {
-        className: "userProfileData"
-      }, _react.default.createElement("p", null, "Member Since: ", (0, _util.formatDate)(this.props.userProfile.createdOn)))))))))))));
+        className: "myWallet"
+      });
     }
   }]);
 
-  return ProfileContainer;
+  return MyWallet;
 }(_react.default.Component);
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -41703,22 +41663,22 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    tokenSignIn: function tokenSignIn(token) {
-      return dispatch((0, _userAuthActions.tokenSignInRequest)(token));
+    signUp: function signUp(user) {
+      return dispatch(signUpRequest(user));
+    },
+    signIn: function signIn(user) {
+      return dispatch(signInRequest(user));
     },
     userProfileFetch: function userProfileFetch() {
-      return dispatch((0, _userProfileActions.userProfileFetchRequest)());
-    },
-    userProfileUpdate: function userProfileUpdate(profile) {
-      return dispatch((0, _userProfileActions.userProfileUpdateRequest)(profile));
+      return dispatch(userProfileFetchRequest());
     }
   };
 };
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyWallet);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../userProfile-form":"components/userProfile-form/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","./../../lib/util.js":"lib/util.js"}],"components/app/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","./../../lib/util.js":"lib/util.js"}],"components/app/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41736,7 +41696,7 @@ var _navbar = _interopRequireDefault(require("../navbar"));
 
 var _landingContainer = _interopRequireDefault(require("../landing-container"));
 
-var _profileContainer = _interopRequireDefault(require("../profile-container"));
+var _mywallet = _interopRequireDefault(require("../mywallet"));
 
 var _mapContainer = _interopRequireDefault(require("../map-container"));
 
@@ -41787,12 +41747,12 @@ function (_React$Component) {
         component: _landingContainer.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/user/:profileID",
-        component: _profileContainer.default
+        path: "/map",
+        component: _mapContainer.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/play",
-        component: _mapContainer.default
+        path: "/mywallet",
+        component: _mywallet.default
       })));
     }
   }]);
@@ -41824,7 +41784,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../navbar":"components/navbar/index.js","../landing-container":"components/landing-container/index.js","../profile-container":"components/profile-container/index.js","../map-container":"components/map-container/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js"}],"reducers/userAuth-reducers.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../navbar":"components/navbar/index.js","../landing-container":"components/landing-container/index.js","../mywallet":"components/mywallet/index.js","../map-container":"components/map-container/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js"}],"reducers/userAuth-reducers.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42123,7 +42083,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53645" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50154" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
