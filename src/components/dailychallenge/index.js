@@ -51,7 +51,7 @@ class DailyChallenge extends React.Component {
             </div>
             <div className='dates'>
                     <p> <img className='xImg' src='https://i.imgur.com/UEIMpcd.png' />14</p>
-                    <p> 15</p>
+                    <p id='today'> 15</p>
                     <p className='needsPadding'> 16</p>
                     <p className='needsPadding'> 17</p>
                     <p className='needsPadding'> 18</p>

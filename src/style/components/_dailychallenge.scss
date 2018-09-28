@@ -53,9 +53,17 @@
           .needsPadding {
               padding-top: 34px;
           }
+          #today {
+            background: #153F90;
+            border-radius: 50%;
+            height: 52px;
+            padding-top: 18px;
+            color: #fff;
+          }
     }
   }
   .dcContainer .button {
     margin-top: 25px;
     margin-bottom: 10px;
+    cursor: pointer;
   }
