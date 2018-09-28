@@ -41625,7 +41625,209 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(LandingContainer);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../intro":"components/intro/index.js","../userProfile-form":"components/userProfile-form/index.js","../map-container":"components/map-container/index.js","./../../lib/util.js":"lib/util.js"}],"components/mywallet/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","../intro":"components/intro/index.js","../userProfile-form":"components/userProfile-form/index.js","../map-container":"components/map-container/index.js","./../../lib/util.js":"lib/util.js"}],"components/dailychallenge/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _reactRouter = require("react-router");
+
+var _userAuthActions = require("../../actions/userAuth-actions.js");
+
+var _userProfileActions = require("../../actions/userProfile-actions.js");
+
+var _mapActions = require("../../actions/map-actions.js");
+
+var _util = require("./../../lib/util.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var DailyChallenge =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(DailyChallenge, _React$Component);
+
+  function DailyChallenge(props) {
+    var _this;
+
+    _classCallCheck(this, DailyChallenge);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DailyChallenge).call(this, props));
+    _this.state = {
+      active: 'today'
+    };
+    return _this;
+  }
+
+  _createClass(DailyChallenge, [{
+    key: "componentWillMount",
+    value: function componentWillMount() {
+      (0, _util.userValidation)(this.props);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react.default.createElement("section", {
+        className: "landingContainer container-outer dcContainer"
+      }, _react.default.createElement("div", {
+        className: "dchead"
+      }, _react.default.createElement("p", null, "June 2024")), _react.default.createElement("div", {
+        className: "calendar"
+      }, _react.default.createElement("div", {
+        className: "days"
+      }, _react.default.createElement("p", null, " Mo"), _react.default.createElement("p", null, " Tu"), _react.default.createElement("p", null, " We"), _react.default.createElement("p", null, " Th"), _react.default.createElement("p", null, " Fr"), _react.default.createElement("p", null, " Sa"), _react.default.createElement("p", null, " Su")), _react.default.createElement("div", {
+        className: "dates"
+      }, _react.default.createElement("p", null, " 31"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "checkImg",
+        src: "https://i.imgur.com/Kqf1z6Y.png"
+      }), "01"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "xImg",
+        src: "https://i.imgur.com/UEIMpcd.png"
+      }), "02"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "checkImg",
+        src: "https://i.imgur.com/Kqf1z6Y.png"
+      }), "03"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "checkImg",
+        src: "https://i.imgur.com/Kqf1z6Y.png"
+      }), "04"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "checkImg",
+        src: "https://i.imgur.com/Kqf1z6Y.png"
+      }), "05"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "xImg",
+        src: "https://i.imgur.com/UEIMpcd.png"
+      }), "06")), _react.default.createElement("div", {
+        className: "dates"
+      }, _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "xImg",
+        src: "https://i.imgur.com/UEIMpcd.png"
+      }), "07"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "checkImg",
+        src: "https://i.imgur.com/Kqf1z6Y.png"
+      }), "08"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "xImg",
+        src: "https://i.imgur.com/UEIMpcd.png"
+      }), "09"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "xImg",
+        src: "https://i.imgur.com/UEIMpcd.png"
+      }), "10"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "checkImg",
+        src: "https://i.imgur.com/Kqf1z6Y.png"
+      }), "11"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "checkImg",
+        src: "https://i.imgur.com/Kqf1z6Y.png"
+      }), "12"), _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "xImg",
+        src: "https://i.imgur.com/UEIMpcd.png"
+      }), "13")), _react.default.createElement("div", {
+        className: "dates"
+      }, _react.default.createElement("p", null, " ", _react.default.createElement("img", {
+        className: "xImg",
+        src: "https://i.imgur.com/UEIMpcd.png"
+      }), "14"), _react.default.createElement("p", null, " 15"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 16"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 17"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 18"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 19"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 20")), _react.default.createElement("div", {
+        className: "dates"
+      }, _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 21"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 22"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 23"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 24"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 25"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 26"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 27")), _react.default.createElement("div", {
+        className: "dates"
+      }, _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 28"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 29"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 30"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 01"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 02"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 03"), _react.default.createElement("p", {
+        className: "needsPadding"
+      }, " 04"))), _react.default.createElement("p", {
+        className: "button lightBlue oauthbuttonText"
+      }, "Start daily challenge"));
+    }
+  }]);
+
+  return DailyChallenge;
+}(_react.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    userAuth: state.userAuth,
+    userProfile: state.userProfile,
+    currentLocation: state.currentLocation
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    tokenSignIn: function tokenSignIn(token) {
+      return dispatch((0, _userAuthActions.tokenSignInRequest)(token));
+    },
+    userProfileFetch: function userProfileFetch() {
+      return dispatch((0, _userProfileActions.userProfileFetchRequest)());
+    },
+    userProfileUpdate: function userProfileUpdate(profile) {
+      return dispatch((0, _userProfileActions.userProfileUpdateRequest)(profile));
+    },
+    currentLocationFetch: function currentLocationFetch() {
+      return dispatch((0, _mapActions.currentLocationFetchRequest)());
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DailyChallenge);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router":"../node_modules/react-router/es/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js","../../actions/map-actions.js":"actions/map-actions.js","./../../lib/util.js":"lib/util.js"}],"components/mywallet/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41870,6 +42072,8 @@ var _navbar = _interopRequireDefault(require("../navbar"));
 
 var _landingContainer = _interopRequireDefault(require("../landing-container"));
 
+var _dailychallenge = _interopRequireDefault(require("../dailychallenge"));
+
 var _mywallet = _interopRequireDefault(require("../mywallet"));
 
 var _dashboard = _interopRequireDefault(require("../dashboard"));
@@ -41931,6 +42135,10 @@ function (_React$Component) {
         component: _mywallet.default
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
+        path: "/dailychallenge",
+        component: _dailychallenge.default
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
         path: "/dashboard",
         component: _dashboard.default
       })));
@@ -41964,7 +42172,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(App);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../navbar":"components/navbar/index.js","../landing-container":"components/landing-container/index.js","../mywallet":"components/mywallet/index.js","../dashboard":"components/dashboard/index.js","../map-container":"components/map-container/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js"}],"reducers/userAuth-reducers.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","react-router-dom":"../node_modules/react-router-dom/es/index.js","../navbar":"components/navbar/index.js","../landing-container":"components/landing-container/index.js","../dailychallenge":"components/dailychallenge/index.js","../mywallet":"components/mywallet/index.js","../dashboard":"components/dashboard/index.js","../map-container":"components/map-container/index.js","../../actions/userAuth-actions.js":"actions/userAuth-actions.js","../../actions/userProfile-actions.js":"actions/userProfile-actions.js"}],"reducers/userAuth-reducers.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42263,7 +42471,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61043" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57985" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

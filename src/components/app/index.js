@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from '../navbar';
 import LandingContainer from '../landing-container';
 // import ProfileContainer from '../profile-container';
-// import DailyChallenge from '../dailychallenge';
+import DailyChallenge from '../dailychallenge';
 import MyWallet from '../mywallet';
 import Dashboard from '../dashboard';
 import MapContainer from '../map-container';
@@ -22,7 +22,7 @@ class App extends React.Component {
           {/* <Route exact path='/user/:profileID' component={ProfileContainer} /> */}
           <Route exact path='/map' component={MapContainer} />
           <Route exact path='/mywallet' component={MyWallet} />
-          {/* <Route exact path='/dailychallenge' component={DailyChallenge} /> */}
+          <Route exact path='/dailychallenge' component={DailyChallenge} />
           <Route exact path='/dashboard' component={Dashboard} /> 
         </section>
       </BrowserRouter>

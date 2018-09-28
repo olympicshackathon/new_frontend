@@ -1498,6 +1498,55 @@ input:active, input:focus {
   .dbCharts img {
     max-width: 100vw; }
 
+.dchead {
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+  text-align: center;
+  margin-bottom: 10px;
+  height: 50px;
+  z-index: 999; }
+  .dchead p {
+    height: 100%;
+    font-weight: 500;
+    color: #646462;
+    line-height: 1;
+    font-size: 20px;
+    padding: 15px; }
+
+.calendar .days {
+  margin: 0 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  width: calc((100vw - 20px));
+  height: 50px; }
+  .calendar .days p {
+    display: inline-block;
+    width: calc((100vw - 20px) / 7);
+    color: #008FD7;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    text-align: center; }
+
+.calendar .dates {
+  margin: 0 10px;
+  height: 50px;
+  width: calc((100vw - 20px)); }
+  .calendar .dates p {
+    color: rgba(139, 139, 139, 0.5);
+    display: inline-block;
+    width: calc((100vw - 20px) / 7);
+    text-align: center; }
+  .calendar .dates .checkImg, .calendar .dates .xImg {
+    max-width: 10vw;
+    max-height: 34px;
+    margin: auto;
+    display: block;
+    padding-top: 8px; }
+  .calendar .dates .needsPadding {
+    padding-top: 34px; }
+
+.dcContainer .button {
+  margin-top: 25px;
+  margin-bottom: 10px; }
+
 #map {
   width: 100vw;
   height: calc((100vh - 50px)); }
