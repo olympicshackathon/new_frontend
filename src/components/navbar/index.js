@@ -53,6 +53,16 @@ class Navbar extends React.Component {
   render() {
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
     let handleComplete = this.state.authFormAction === 'Register' ? this.handleSignup : this.handleSignin;
+    let gdNavStyle =  {
+      background: '#50504f',
+      position: 'fixed',
+      top: '0',
+      right: '0',
+      bottom: '0',
+      width: '20vw',
+      height: '100vh',
+      zIndex: '9999',
+    };
     return (
         <header>
           <nav>
@@ -73,7 +83,7 @@ class Navbar extends React.Component {
               })}>
                 {renderIf(this.props.userAuth && this.state.showDropDown ,
                   <div className='distanceContainer'>
-                  <div className='grayedoutnav'></div>
+                  <div className='grayedoutnav' style={gdNavStyle}></div>
                   <div className='distance'>
                     <p>7,3 km</p>
                   </div>
