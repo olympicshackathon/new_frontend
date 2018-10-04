@@ -54,14 +54,14 @@ class Navbar extends React.Component {
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
     let handleComplete = this.state.authFormAction === 'Register' ? this.handleSignup : this.handleSignin;
     let gdNavStyle =  {
-      background: '#50504f',
-      position: 'fixed',
-      top: '0',
-      right: '0',
-      bottom: '0',
-      width: '20vw',
-      height: '100vh',
-      zIndex: '9999',
+      background: '#50504f !important',
+      position: 'fixed !important',
+      top: '0 !important',
+      right: '0 !important',
+      bottom: '0 !important',
+      width: '20vw !important',
+      height: '100vh !important',
+      zIndex: '9999 !important',
     };
     return (
         <header>
