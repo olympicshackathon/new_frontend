@@ -29,10 +29,16 @@ export const currentLocationFetchRequest = () => dispatch => {
         lat = pos.coords.latitude;
         lng = pos.coords.longitude;
         dispatch(currentLocationFetch({ lat, lng }));
+    },
+    err => {
+      dispatch(currentLocationFetch({ lat: 48.8566, lng: 2.3522 }));
+    },
+    {
+      timeout: 5000,
     });
-  } else {
-    dispatch(currentLocationFetch({ lat: 48.8566, lng: 2.3522 }));
-  }
+    } else {
+      dispatch(currentLocationFetch({ lat: 48.8566, lng: 2.3522 }));
+    }
 };
 
 // export const locationPhotoFetchRequest = photoRef => dispatch => {
