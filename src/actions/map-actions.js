@@ -1,4 +1,7 @@
-const superagent = require('superagent');
+import superagent from 'superagent';
+import noCache from 'superagent-no-cache';
+import isIE from 'ie';
+var finalNoCache = isIE ? noCache : noCache.withQueryStrings;
 
 export const googlePlacesFetch = results => ({
   type: 'GOOGLE_PLACES_FETCH',
@@ -11,9 +14,10 @@ export const currentLocationFetch = location => ({
 });
 
 export const googlePlacesFetchRequest = location => dispatch => {
-  console.log('location argument: ', location);
+  // console.log('location argument: ', location);
   // return superagent.get(`https://maps.googleapis.com/maps/api/js?key=${process.env.__GAPI_KEY__}&libraries=places`)
   return superagent.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location.lat},${location.lng}&radius=1600&type=restaurant&key=${process.env.__GAPI_KEY__}&libraries=places`)
+    .use(finalNoCache)
     .then(res => {
         console.log('res: ', res.body.results);
       dispatch(googlePlacesFetch(res.body.results));
