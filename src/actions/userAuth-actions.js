@@ -1,7 +1,4 @@
 import superagent from 'superagent';
-import noCache from 'superagent-no-cache';
-import isIE from 'ie';
-var finalNoCache = isIE ? noCache : noCache.withQueryStrings;
 
 export const signIn = token => ({
   type: 'SIGN_IN',
@@ -15,7 +12,6 @@ export const signOut = () => {
 
 export const signUpRequest = user => dispatch => {
   return superagent.post(`${process.env.API_URL}/api/signup`)
-    .use(finalNoCache)
     .withCredentials()
     .send(user)
     .then( res => {
@@ -27,7 +23,6 @@ export const signUpRequest = user => dispatch => {
 
 export const signInRequest = user => dispatch => {
   return superagent.get(`${process.env.API_URL}/api/signin`)
-    .use(finalNoCache)
     .withCredentials()
     .auth(user.username, user.password)
     .then( res => {
@@ -39,7 +34,6 @@ export const signInRequest = user => dispatch => {
 
 export const tokenSignInRequest = token => dispatch => {
   return superagent.get(`${process.env.API_URL}/api/signin/token`)
-    .use(finalNoCache)
     .set('Authorization', `Bearer ${token}`)
     .then( res => {
       dispatch(signIn(res.text));
