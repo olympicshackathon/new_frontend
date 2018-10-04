@@ -21,7 +21,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "component-ie": "^1.0.0",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
@@ -37,7 +36,6 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "superagent": "^3.8.2",
-    "superagent-no-cache": "^0.1.1",
     "validator": "^9.4.1"
   },
   "devDependencies": {
