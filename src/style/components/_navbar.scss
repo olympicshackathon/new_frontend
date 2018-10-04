@@ -217,17 +217,6 @@ header {
    width: calc((80vw - 60px));
    text-align: left;
 
-   .grayedoutnav {
-      background: #50504f;
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 20vw;
-      z-index: 9999;
-      height: 100vh;
-    }
-
    .distanceContainer {
     display: inline-block;
    }
@@ -391,6 +380,16 @@ input:active, input:focus {
 }
 .indentSmall {
   margin-left: 0 !important;
+}
+.grayedoutnav {
+  background: rgba(80, 80, 80, .95);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20vw;
+  z-index: 9999;
+  height: 100vh;
 }
 @media (max-width: 399px) {
   .indentSmall {
