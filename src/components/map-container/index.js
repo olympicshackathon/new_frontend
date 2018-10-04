@@ -91,7 +91,7 @@ class MapContainer extends React.Component {
             position: item.location,
             title: item.name,
             icon: {
-                url: 'http://www.clker.com/cliparts/E/9/d/W/E/9/google-maps-icon-blank-red.svg.hi.png',
+                url: 'https://i.imgur.com/DsviDke.png',
                 anchor: new google.maps.Point(16, 16),
                 scaledSize: new google.maps.Size(32, 32)
             },
